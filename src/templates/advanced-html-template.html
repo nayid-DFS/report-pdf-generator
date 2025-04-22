@@ -58,32 +58,33 @@
       height: 95vh; /* Reduced height to ensure it fits on one page */
       padding: 20px; /* Reduced padding */
       page-break-after: always;
-      background-color: #e6f5f0; /* Light green background */
+      background-color: #308c66; /* Updated green color */
     }
     
     .cover-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 20px; /* Reduced margin */
+      margin-bottom: 40px; /* Increased to accommodate larger logos */
+      width: 100%;
     }
     
     .logo {
-      height: 50px; /* Slightly reduced logo size */
-      max-width: 200px;
+      height: 225px; /* Increased by another 50% from 150px */
+      max-width: 900px; /* Increased by another 50% from 600px */
       object-fit: contain;
     }
     
     .logo-placeholder {
-      height: 50px;
-      width: 150px;
+      height: 225px; /* Increased by another 50% from 150px */
+      width: 675px; /* Increased by another 50% from 450px */
       background-color: #008866;
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 48px; /* Increased from 32px */
       border-radius: 5px;
     }
     
@@ -100,30 +101,48 @@
       font-family: 'Merriweather', serif;
       font-size: 32px;
       font-weight: 700;
-      color: #00664d;
+      color: #ffffff; /* Changed to white */
       margin-bottom: 20px;
       text-align: center;
     }
     
     .cover-subtitle {
       font-size: 20px;
-      color: #008866;
+      color: #e6f5f0; /* Light green */
       margin-bottom: 10px;
       text-align: center;
     }
     
     .cover-date {
       font-size: 16px;
-      color: #666;
+      color: #e6f5f0; /* Light green */
       margin-top: 30px;
       text-align: center;
     }
     
     .cover-footer {
       font-size: 11px;
-      color: #666;
+      color: #e6f5f0; /* Light green */
       text-align: center;
       margin-top: 20px; /* Reduced margin */
+    }
+    
+    /* Added styles for the country/crisis placeholder */
+    .cover-country {
+      font-size: 18px;
+      color: #ffffff;
+      margin-bottom: 5px;
+      text-align: center;
+      font-weight: 300;
+    }
+    
+    /* Added styles for the date range placeholder */
+    .cover-date-range {
+      font-size: 14px;
+      color: #e6f5f0;
+      margin-top: 5px;
+      text-align: center;
+      font-style: italic;
     }
     
     /* Original styles */
@@ -213,7 +232,6 @@
     
     .group {
       margin-bottom: 30px;
-      page-break-before: always;
     }
     
     .first-group {
@@ -228,12 +246,11 @@
       color: #00664d;
       font-size: 24px;
       font-weight: 700;
-      margin: 30px 0 20px 0;
+      margin: 0; /* Remove default margins */
       text-align: center;
       border-bottom: 2px solid #00664d;
       padding-bottom: 8px;
       font-family: 'Merriweather', serif;
-      page-break-before: always;
     }
     
     .group-title {
@@ -464,6 +481,67 @@
       border-bottom: 1px solid #dddddd;
       padding-bottom: 3px;
     }
+    
+    /* Partner logo as white */
+    .partner-logo {
+      height: 225px;
+      max-width: 900px;
+      object-fit: contain;
+      filter: brightness(0) invert(1); /* Makes the logo white */
+    }
+    
+    /* Container for main category title to center it vertically */
+    .main-category-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 20vh; /* Reduced significantly to avoid blank pages */
+      padding: 2% 0; /* Reduced padding */
+      margin-top: 40px; /* Add top margin instead of page break */
+      margin-bottom: 20px; /* Add bottom margin */
+    }
+    
+    /* About page styles */
+    .about-page {
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+      page-break-after: always;
+    }
+    
+    .about-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #00664d;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #00664d;
+      padding-bottom: 8px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .about-section {
+      margin-bottom: 30px;
+    }
+    
+    .about-subtitle {
+      font-size: 18px;
+      font-weight: 600;
+      color: #008866;
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .about-content {
+      font-size: 12px;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Specific style for second main category to add page break */
+    .second-main-category {
+      page-break-before: always;
+    }
   </style>
 </head>
 <body>
@@ -477,20 +555,54 @@
       {{/if}}
       
       {{#if partnerLogoBase64}}
-      <img src="{{partnerLogoBase64}}" alt="Partner Logo" class="logo">
+      <img src="{{partnerLogoBase64}}" alt="Partner Logo" class="partner-logo">
       {{else}}
       <div class="logo-placeholder">Partner</div>
       {{/if}}
     </div>
     
     <div class="cover-content">
+      <p class="cover-country">[Country/Crisis]</p>
       <h1 class="cover-title">{{title}}</h1>
       <p class="cover-subtitle">Weekly Situation Report</p>
+      <p class="cover-date-range">[From: DD/MM/YYYY to DD/MM/YYYY]</p>
       <p class="cover-date">Generated on {{formatDate}}</p>
     </div>
     
     <div class="cover-footer">
       <p>GANNET SitHub &copy; {{currentYear}}</p>
+    </div>
+  </div>
+  
+  <!-- About Page -->
+  <div class="about-page">
+    <h1 class="about-title">About this Report</h1>
+    
+    <div class="about-section">
+      <h2 class="about-subtitle">Purpose</h2>
+      <p class="about-content">
+        This report provides a comprehensive overview of the current humanitarian situation, 
+        focusing on both operational environment factors and sectoral analysis. It aims to 
+        support informed decision-making for humanitarian partners and stakeholders.
+      </p>
+    </div>
+    
+    <div class="about-section">
+      <h2 class="about-subtitle">Methodology</h2>
+      <p class="about-content">
+        This report aims to provide reliable and up-to-date information on the context of the situation at hand. To ensure accuracy and relevance, DFS has conducted a rigorous Secondary Data Review (SDR) process, focusing on publicly available data related to the humanitarian context. DFS Analysts leveraged the AI-based tool GANNET to support and accelerate the analysis process; however, all findings presented have been directly developed and verified by the analysis team. Recognizing the potential for bias or inaccuracies in media and other secondary sources, special care has been taken to triangulate and validate all information, with direct links to original sources provided for transparency and further review. In response to requests from partners, DFS rapidly launched the Emergency SituationHub, offering a comprehensive and continually updated background overview. Our interactive media tool supports users in navigating relevant local and international sources, while GANNET has enabled contributions to joint analytical products and inter-agency processes, including workshops, SOPs, workplans, and terms of reference.
+      </p>
+    </div>
+    
+    <div class="about-section">
+      <h2 class="about-subtitle">About GANNET</h2>
+      <p class="about-content">
+        GANNET is a humanitarian information management system designed to support 
+        coordination and response planning. It provides tools for data collation, 
+        analysis, and visualization to help humanitarian actors access and utilize 
+        critical information for their operations. GANNET is committed to improving 
+        the effectiveness of humanitarian action through better information management.
+      </p>
     </div>
   </div>
 
@@ -553,7 +665,9 @@
     <!-- Content -->
     <!-- Operational Environment Section -->
     <div class="category-section">
-      <h1 class="main-category-title">{{operationalEnvCategory.title}}</h1>
+      <div class="main-category-container">
+        <h1 class="main-category-title">{{operationalEnvCategory.title}}</h1>
+      </div>
       
       {{#each operationalEnvCategory.groups}}
       <div class="group">
@@ -590,8 +704,10 @@
     </div>
     
     <!-- Sectoral Analysis Section -->
-    <div class="category-section">
-      <h1 class="main-category-title">{{sectoralAnalysisCategory.title}}</h1>
+    <div class="category-section second-main-category">
+      <div class="main-category-container">
+        <h1 class="main-category-title">{{sectoralAnalysisCategory.title}}</h1>
+      </div>
       
       {{#each sectoralAnalysisCategory.groups}}
       <div class="group">
