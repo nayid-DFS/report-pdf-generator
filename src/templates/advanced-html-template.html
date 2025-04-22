@@ -159,7 +159,7 @@
       border-left: 3px solid #006699;
     }
     
-    /* Styling for Markdown content */
+    /* Styling for content */
     .content-block h2 {
       color: #006699;
       font-size: 18px;
@@ -217,15 +217,16 @@
       <h2 class="group-title">{{this.title}}</h2>
       
       <div class="content-block">
-        {{! Process the content as Markdown and inject the IDs for TOC links }}
-        {{#markdown}}
-          {{! Loop through the content and add IDs to the headings }}
-          {{#each ../headings}}
-          ## {{this.title}} {#{{this.id}}}
+        {{#if this.content}}
+          <p>{{{this.content}}}</p>
+        {{/if}}
+        
+        {{#if this.sections}}
+          {{#each this.sections}}
+            <h2 id="{{lookup ../headings @index 'id'}}">{{this.title}}</h2>
+            <p>{{{this.content}}}</p>
           {{/each}}
-          
-          {{{../content}}}
-        {{/markdown}}
+        {{/if}}
       </div>
       
       {{#if this.sources}}

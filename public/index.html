@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GANNET SitHub PDF Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>GANNET SitHub PDF Generator</h1>
+      <p>Upload your JSON data and generate a professionally formatted PDF report</p>
+    </header>
+
+    <main>
+      <div class="upload-section">
+        <div class="file-upload-container">
+          <div id="drop-area">
+            <form id="upload-form">
+              <input type="file" id="fileInput" accept=".json" hidden>
+              <label for="fileInput" class="file-input-label">
+                <div class="dropzone-content">
+                  <img src="upload-icon.svg" alt="Upload" id="upload-icon">
+                  <p>Drag & drop your JSON file here</p>
+                  <p>or</p>
+                  <button type="button" id="browse-button">Browse files</button>
+                </div>
+              </label>
+            </form>
+          </div>
+          <div id="file-details" class="hidden">
+            <div class="file-info">
+              <span id="file-name">No file selected</span>
+              <span id="file-size"></span>
+            </div>
+            <button type="button" id="remove-file">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="generate-button" disabled>Generate PDF</button>
+      </div>
+
+      <div id="status" class="hidden">
+        <div class="spinner"></div>
+        <p id="status-message">Generating PDF...</p>
+      </div>
+
+      <div id="result" class="hidden">
+        <div class="success-icon">✓</div>
+        <h3>PDF Generated Successfully!</h3>
+        <p>Your PDF report has been created and is ready for download.</p>
+        <a id="download-link" href="#" class="download-button">Download PDF</a>
+        <button id="new-file-button" class="secondary-button">Process another file</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>GANNET SitHub PDF Generator &copy; <span id="current-year"></span></p>
+    </footer>
+  </div>
+
+  <script src="upload-icon.js"></script>
+  <script src="script.js"></script>
+</body>
+</html> 
