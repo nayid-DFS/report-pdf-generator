@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <style>
+    .text { font-family: 'Arial', sans-serif; font-weight: bold; }
+    .primary { fill: #003366; }
+    .secondary { fill: #006699; }
+  </style>
+  <text x="10" y="40" class="text primary" font-size="32">GANNET</text>
+  <text x="10" y="55" class="text secondary" font-size="14">SitHub Platform</text>
+</svg> 

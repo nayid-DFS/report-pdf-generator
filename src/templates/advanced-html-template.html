@@ -4,6 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{title}}</title>
+  <script>
+  // This script helps ensure clickable links work in the PDF
+  document.addEventListener('DOMContentLoaded', function() {
+    // Make sure all links open in a new tab and have the appropriate styling
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+      if (link.href && !link.getAttribute('target')) {
+        // If it's an anchor link (internal navigation), don't set target="_blank"
+        if (link.href.includes('#')) {
+          // It's an internal link - enhance for PDF navigation
+          const href = link.getAttribute('href');
+          if (href.startsWith('#')) {
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+              // Add special attributes for PDF navigation
+              link.setAttribute('data-internal-link', 'true');
+              link.setAttribute('data-target', targetId);
+            }
+          }
+        } else {
+          // External link - open in new tab
+          link.setAttribute('target', '_blank');
+        }
+      }
+    });
+  });
+  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:wght@400;700&display=swap');
     
@@ -22,6 +50,67 @@
       padding: 10px;
     }
     
+    /* Cover page styles */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      padding: 40px;
+      page-break-after: always;
+    }
+    
+    .cover-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+    
+    .logo {
+      height: 60px;
+    }
+    
+    .cover-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      text-align: center;
+    }
+    
+    .cover-title {
+      font-family: 'Merriweather', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #003366;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .cover-subtitle {
+      font-size: 20px;
+      color: #006699;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    .cover-date {
+      font-size: 16px;
+      color: #666;
+      margin-top: 30px;
+      text-align: center;
+    }
+    
+    .cover-footer {
+      font-size: 11px;
+      color: #666;
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    /* Original styles */
     .report-title {
       text-align: center;
       color: #003366;
@@ -55,15 +144,30 @@
       margin-bottom: 15px;
     }
     
+    .toc-main-category {
+      margin-bottom: 20px;
+    }
+    
+    .toc-main-category-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #003366;
+      margin: 20px 0 10px 0;
+      border-bottom: 1px solid #003366;
+      padding-bottom: 5px;
+      font-family: 'Merriweather', serif;
+    }
+    
     .toc-group-title {
       font-size: 16px;
       font-weight: 500;
       color: #006699;
       margin-bottom: 10px;
+      margin-left: 15px;
     }
     
     .toc-sections {
-      margin-left: 20px;
+      margin-left: 30px;
     }
     
     .toc-section {
@@ -74,10 +178,17 @@
       color: #333;
       text-decoration: none;
       font-size: 14px;
+      position: relative;
+      padding-left: 5px;
+      border-left: 2px solid transparent;
+      transition: all 0.2s ease;
     }
     
     .toc-section a:hover {
       text-decoration: underline;
+      color: #006699;
+      border-left: 2px solid #006699;
+      padding-left: 8px;
     }
     
     .toc-page {
@@ -93,6 +204,22 @@
       page-break-before: avoid;
     }
     
+    .category-section {
+      margin-bottom: 40px;
+    }
+    
+    .main-category-title {
+      color: #003366;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 30px 0 20px 0;
+      text-align: center;
+      border-bottom: 2px solid #003366;
+      padding-bottom: 8px;
+      font-family: 'Merriweather', serif;
+      page-break-before: always;
+    }
+    
     .group-title {
       color: #003366;
       font-size: 20px;
@@ -101,6 +228,10 @@
       border-bottom: 1px solid #003366;
       padding-bottom: 5px;
       font-family: 'Merriweather', serif;
+    }
+    
+    .group-content-empty {
+      margin-bottom: 30px;
     }
     
     .section {
@@ -146,6 +277,47 @@
       color: #666;
     }
     
+    .source-url {
+      display: block;
+      margin-top: 2px;
+      margin-left: 10px;
+      font-size: 10px;
+      max-width: 90%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    
+    .source-url a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: normal;
+    }
+    
+    .source-url a:hover {
+      text-decoration: underline;
+    }
+    
+    .consolidated-sources {
+      margin-top: 40px;
+      page-break-before: always;
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    
+    .sources-by-group {
+      margin-bottom: 15px;
+    }
+    
+    .source-group-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #006699;
+      margin-bottom: 5px;
+      border-bottom: 1px solid #dddddd;
+      padding-bottom: 3px;
+    }
+    
     .page-break {
       page-break-after: always;
     }
@@ -183,13 +355,120 @@
       margin-bottom: 5px;
     }
     
+    /* Markdown formatting */
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+      color: #006699;
+      font-family: 'Merriweather', serif;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+    }
+    
+    .markdown h1 {
+      font-size: 22px;
+    }
+    
+    .markdown h2 {
+      font-size: 18px;
+    }
+    
+    .markdown h3 {
+      font-size: 16px;
+    }
+    
+    .markdown p {
+      margin-bottom: 1em;
+    }
+    
+    .markdown ul, .markdown ol {
+      margin-bottom: 1em;
+      padding-left: 20px;
+    }
+    
+    .markdown li {
+      margin-bottom: 0.5em;
+    }
+    
+    .markdown code {
+      background-color: #f0f0f0;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    
+    .markdown blockquote {
+      border-left: 3px solid #ccc;
+      padding-left: 10px;
+      margin-left: 0;
+      color: #666;
+    }
+    
     /* Better styling for document header/footer */
     @page {
       margin: 25mm 20mm;
     }
+    
+    /* PDF-specific link styling */
+    @media print {
+      a {
+        color: #0066cc !important;
+        text-decoration: underline !important;
+      }
+      
+      .source-url a {
+        color: #0066cc !important;
+        text-decoration: underline !important;
+        word-break: break-all;
+      }
+      
+      .toc-section a {
+        color: #000066 !important;
+        text-decoration: none !important;
+      }
+    }
+    
+    .sources-category {
+      margin-bottom: 30px;
+    }
+    
+    .source-category-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #003366;
+      margin: 25px 0 15px 0;
+      border-bottom: 1px solid #003366;
+      padding-bottom: 5px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .source-group-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #006699;
+      margin: 15px 0 10px 0;
+      border-bottom: 1px solid #dddddd;
+      padding-bottom: 3px;
+    }
   </style>
 </head>
 <body>
+  <!-- Cover Page -->
+  <div class="cover-page">
+    <div class="cover-header">
+      <img src="file:///Users/nayid/Documents/GANNET_Test/report-pdf-generator/public/images/gannet-logo.svg" alt="GANNET Logo" class="logo">
+      <img src="file:///Users/nayid/Documents/GANNET_Test/report-pdf-generator/public/images/partner-logo.svg" alt="Partner Logo" class="logo">
+    </div>
+    
+    <div class="cover-content">
+      <h1 class="cover-title">{{title}}</h1>
+      <p class="cover-subtitle">Weekly Situation Report</p>
+      <p class="cover-date">Generated on {{formatDate}}</p>
+    </div>
+    
+    <div class="cover-footer">
+      <p>GANNET SitHub &copy; {{currentYear}} | Confidential</p>
+    </div>
+  </div>
+
   <div class="container">
     <h1 class="report-title">{{title}}</h1>
     
@@ -197,50 +476,204 @@
     <div class="toc-container">
       <h2 class="toc-title">Table of Contents</h2>
       
-      {{#each groups}}
+      <!-- Operational Environment Section -->
+      <div class="toc-main-category">
+        <div class="toc-main-category-title">{{operationalEnvCategory.title}}</div>
+        
+        <!-- Groups under Operational Environment -->
+        {{#each operationalEnvCategory.groups}}
+        <div class="toc-group">
+          <div class="toc-group-title">{{this.title}}</div>
+          {{#if this.headings.length}}
+          <div class="toc-sections">
+            {{#each this.headings}}
+            <div class="toc-section">
+              <a href="#{{this.id}}" class="internal-link" data-target-id="{{this.id}}">{{this.title}}</a>
+            </div>
+            {{/each}}
+          </div>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+      
+      <!-- Sectoral Analysis Section -->
+      <div class="toc-main-category">
+        <div class="toc-main-category-title">{{sectoralAnalysisCategory.title}}</div>
+        
+        <!-- Groups under Sectoral Analysis -->
+        {{#each sectoralAnalysisCategory.groups}}
+        <div class="toc-group">
+          <div class="toc-group-title">{{this.title}}</div>
+          {{#if this.headings.length}}
+          <div class="toc-sections">
+            {{#each this.headings}}
+            <div class="toc-section">
+              <a href="#{{this.id}}" class="internal-link" data-target-id="{{this.id}}">{{this.title}}</a>
+            </div>
+            {{/each}}
+          </div>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+      
+      {{#if hasConsolidatedSources}}
       <div class="toc-group">
-        <div class="toc-group-title">{{this.title}}</div>
-        <div class="toc-sections">
-          {{#each this.headings}}
-          <div class="toc-section">
-            <a href="#{{this.id}}">{{this.title}}</a>
+        <div class="toc-group-title">Sources</div>
+      </div>
+      {{/if}}
+    </div>
+    
+    <!-- Content -->
+    <!-- Operational Environment Section -->
+    <div class="category-section">
+      <h1 class="main-category-title">{{operationalEnvCategory.title}}</h1>
+      
+      {{#each operationalEnvCategory.groups}}
+      <div class="group">
+        <h2 class="group-title">{{this.title}}</h2>
+        
+        {{#if this.content}}
+        <div class="content-block markdown">
+          {{{this.content}}}
+          
+          {{#if this.sections}}
+            {{#each this.sections}}
+            <div class="section">
+              <h2 id="{{this.id}}">{{this.title}}</h2>
+              <div class="markdown">{{{this.content}}}</div>
+            </div>
+            {{/each}}
+          {{/if}}
+        </div>
+        {{else if this.sections.length}}
+        <div class="content-block markdown">
+          {{#each this.sections}}
+          <div class="section">
+            <h2 id="{{this.id}}">{{this.title}}</h2>
+            <div class="markdown">{{{this.content}}}</div>
           </div>
           {{/each}}
         </div>
+        {{else}}
+        <!-- Empty group, it's just a title -->
+        <div class="group-content-empty"></div>
+        {{/if}}
       </div>
       {{/each}}
     </div>
     
-    <!-- Content -->
-    {{#each groups}}
-    <div class="group {{#if @first}}first-group{{/if}}">
-      <h2 class="group-title">{{this.title}}</h2>
+    <!-- Sectoral Analysis Section -->
+    <div class="category-section">
+      <h1 class="main-category-title">{{sectoralAnalysisCategory.title}}</h1>
       
-      <div class="content-block">
-        {{#if this.content}}
-          <p>{{{this.content}}}</p>
-        {{/if}}
+      {{#each sectoralAnalysisCategory.groups}}
+      <div class="group">
+        <h2 class="group-title">{{this.title}}</h2>
         
-        {{#if this.sections}}
+        {{#if this.content}}
+        <div class="content-block markdown">
+          {{{this.content}}}
+          
+          {{#if this.sections}}
+            {{#each this.sections}}
+            <div class="section">
+              <h2 id="{{this.id}}">{{this.title}}</h2>
+              <div class="markdown">{{{this.content}}}</div>
+            </div>
+            {{/each}}
+          {{/if}}
+        </div>
+        {{else if this.sections.length}}
+        <div class="content-block markdown">
           {{#each this.sections}}
-            <h2 id="{{lookup ../headings @index 'id'}}">{{this.title}}</h2>
-            <p>{{{this.content}}}</p>
+          <div class="section">
+            <h2 id="{{this.id}}">{{this.title}}</h2>
+            <div class="markdown">{{{this.content}}}</div>
+          </div>
           {{/each}}
+        </div>
+        {{else}}
+        <!-- Empty group, it's just a title -->
+        <div class="group-content-empty"></div>
         {{/if}}
       </div>
-      
-      {{#if this.sources}}
-      <div class="sources-section">
-        <h3 class="sources-title">Sources:</h3>
-        <ul class="source-list">
-          {{#each this.sources}}
-          <li class="source-item">{{this.title}}</li>
-          {{/each}}
-        </ul>
-      </div>
-      {{/if}}
+      {{/each}}
     </div>
-    {{/each}}
+    
+    <!-- Consolidated Sources Section -->
+    {{#if hasConsolidatedSources}}
+    <div class="consolidated-sources">
+      <h2 class="sources-title">Sources</h2>
+      
+      <!-- Operational Environment Sources -->
+      <div class="sources-category">
+        <h3 class="source-category-title">{{operationalEnvCategory.title}}</h3>
+        
+        {{#each operationalEnvCategory.groups}}
+          {{#with this}}
+          <!-- Filter sources for this group -->
+          <div class="sources-by-group">
+            <h4 class="source-group-title">{{this.title}}</h4>
+            <ul class="source-list">
+              {{#each @root.consolidatedSources}}
+                {{#if (eq this.group ../title)}}
+                {{#if (eq this.category ../../operationalEnvCategory.title)}}
+                <li class="source-item">
+                  <strong>{{this.title}}</strong>
+                  {{#if this.section}} 
+                  <span class="source-section">({{this.section}})</span>
+                  {{/if}}
+                  {{#if this.url}}
+                  <div class="source-url">
+                    <a href="{{this.url}}" target="_blank">{{this.url}}</a>
+                  </div>
+                  {{/if}}
+                </li>
+                {{/if}}
+                {{/if}}
+              {{/each}}
+            </ul>
+          </div>
+          {{/with}}
+        {{/each}}
+      </div>
+      
+      <!-- Sectoral Analysis Sources -->
+      <div class="sources-category">
+        <h3 class="source-category-title">{{sectoralAnalysisCategory.title}}</h3>
+        
+        {{#each sectoralAnalysisCategory.groups}}
+          {{#with this}}
+          <!-- Filter sources for this group -->
+          <div class="sources-by-group">
+            <h4 class="source-group-title">{{this.title}}</h4>
+            <ul class="source-list">
+              {{#each @root.consolidatedSources}}
+                {{#if (eq this.group ../title)}}
+                {{#if (eq this.category ../../sectoralAnalysisCategory.title)}}
+                <li class="source-item">
+                  <strong>{{this.title}}</strong>
+                  {{#if this.section}} 
+                  <span class="source-section">({{this.section}})</span>
+                  {{/if}}
+                  {{#if this.url}}
+                  <div class="source-url">
+                    <a href="{{this.url}}" target="_blank">{{this.url}}</a>
+                  </div>
+                  {{/if}}
+                </li>
+                {{/if}}
+                {{/if}}
+              {{/each}}
+            </ul>
+          </div>
+          {{/with}}
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
   </div>
 </body>
 </html>

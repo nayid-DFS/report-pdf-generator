@@ -8,7 +8,13 @@ const { v4: uuidv4 } = require('uuid');
 
 // Register Handlebars helper to convert Markdown to HTML
 handlebars.registerHelper('markdown', function(content) {
-  return new handlebars.SafeString(marked.parse(content));
+  if (!content) return '';
+  // Replace ## headings with properly marked headings for TOC linking
+  const processedContent = content.replace(/## (.+)/g, (match, title) => {
+    const id = `section-${uuidv4()}`;
+    return `<h2 id="${id}">${title}</h2>`;
+  });
+  return new handlebars.SafeString(marked.parse(processedContent));
 });
 
 // Register helper to generate unique IDs for sections
@@ -23,24 +29,73 @@ async function generateAdvancedPDF() {
     const data = JSON.parse(jsonData);
     
     // Read the HTML template
-    const templateHtml = fs.readFileSync(path.join(__dirname, 'advanced-template.html'), 'utf8');
+    const templateHtml = fs.readFileSync(path.join(__dirname, 'templates', 'advanced-html-template.html'), 'utf8');
+    
+    // Ensure we always have the two main parts with correct titles
+    const operationalEnvIndex = data[0].groups.findIndex(g => g.title.toLowerCase().includes('operational environment'));
+    const sectoralAnalysisIndex = data[0].groups.findIndex(g => g.title.toLowerCase().includes('sectoral analysis'));
+    
+    // If the main parts don't exist with correct titles, reorganize as needed
+    const organizedGroups = [];
+    
+    // Add Operational Environment section if it exists, otherwise create a placeholder
+    if (operationalEnvIndex >= 0) {
+      organizedGroups.push(data[0].groups[operationalEnvIndex]);
+    } else {
+      organizedGroups.push({
+        title: "Operational Environment",
+        content: "No operational environment data available.",
+        sections: []
+      });
+    }
+    
+    // Add Sectoral Analysis section if it exists, otherwise create a placeholder
+    if (sectoralAnalysisIndex >= 0) {
+      organizedGroups.push(data[0].groups[sectoralAnalysisIndex]);
+    } else {
+      organizedGroups.push({
+        title: "Sectoral Analysis",
+        content: "No sectoral analysis data available.",
+        sections: []
+      });
+    }
+    
+    // Add any other groups that are not the main parts
+    data[0].groups.forEach((group, index) => {
+      if (index !== operationalEnvIndex && index !== sectoralAnalysisIndex) {
+        organizedGroups.push(group);
+      }
+    });
     
     // Process data to create table of contents entries
     const processedData = {
-      title: data[0].title,
-      groups: data[0].groups.map(group => {
+      title: "Situational Analysis", // Always set the general title to "Situational Analysis"
+      groups: organizedGroups.map(group => {
         // Extract headings from content for TOC
         const headings = [];
-        const content = group.content;
         
-        // Simple regex to extract headings from markdown
-        const headingRegex = /^## (.+)$/gm;
-        let match;
-        while ((match = headingRegex.exec(content)) !== null) {
-          headings.push({
-            title: match[1],
-            id: `section-${uuidv4()}`
+        // Process sections if they exist
+        if (group.sections && Array.isArray(group.sections)) {
+          group.sections.forEach(section => {
+            if (section.title) {
+              headings.push({
+                title: section.title,
+                id: `section-${uuidv4()}`
+              });
+            }
           });
+        }
+        
+        // Also extract markdown headings from content
+        if (group.content) {
+          const headingRegex = /## (.+)$/gm;
+          let match;
+          while ((match = headingRegex.exec(group.content)) !== null) {
+            headings.push({
+              title: match[1].trim(),
+              id: `section-${uuidv4()}`
+            });
+          }
         }
         
         return {
@@ -66,7 +121,7 @@ async function generateAdvancedPDF() {
     
     // Generate PDF with proper styling and formatting
     await page.pdf({
-      path: path.join(__dirname, 'GANNET_SitHub_Report_Advanced.pdf'),
+      path: path.join(__dirname, '..', 'output', 'Situational_Analysis_Report.pdf'),
       format: 'A4',
       margin: {
         top: '25mm',
