@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operational Environment</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:wght@400;700&display=swap');
+    
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      font-size: 12px;
+    }
+    
+    .container {
+      max-width: 100%;
+      padding: 10px;
+    }
+    
+    .report-title {
+      text-align: center;
+      color: #003366;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #003366;
+      padding-bottom: 10px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .toc-container {
+      margin: 20px 0 40px;
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      page-break-after: always;
+    }
+    
+    .toc-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #003366;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #003366;
+      padding-bottom: 5px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .toc-group {
+      margin-bottom: 15px;
+    }
+    
+    .toc-group-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #006699;
+      margin-bottom: 10px;
+    }
+    
+    .toc-sections {
+      margin-left: 20px;
+    }
+    
+    .toc-section {
+      margin-bottom: 5px;
+    }
+    
+    .toc-section a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .toc-section a:hover {
+      text-decoration: underline;
+    }
+    
+    .toc-page {
+      float: right;
+    }
+    
+    .group {
+      margin-bottom: 30px;
+      page-break-before: always;
+    }
+    
+    .first-group {
+      page-break-before: avoid;
+    }
+    
+    .group-title {
+      color: #003366;
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #003366;
+      padding-bottom: 5px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .section {
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      color: #006699;
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    .sources-section {
+      margin-top: 20px;
+      border-top: 1px dashed #ccc;
+      padding-top: 10px;
+    }
+    
+    .sources-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #666;
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .source-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    .source-item {
+      margin-bottom: 5px;
+      font-size: 11px;
+      color: #666;
+    }
+    
+    .page-break {
+      page-break-after: always;
+    }
+    
+    /* Content styling */
+    .content-block {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border-left: 3px solid #006699;
+    }
+    
+    /* Styling for content */
+    .content-block h2 {
+      color: #006699;
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .content-block p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    .content-block ul, .content-block ol {
+      margin-bottom: 15px;
+      padding-left: 20px;
+    }
+    
+    .content-block li {
+      margin-bottom: 5px;
+    }
+    
+    /* Better styling for document header/footer */
+    @page {
+      margin: 25mm 20mm;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="report-title">Operational Environment</h1>
+    
+    <!-- Table of Contents -->
+    <div class="toc-container">
+      <h2 class="toc-title">Table of Contents</h2>
+      
+      <div class="toc-group">
+        <div class="toc-group-title">Economy</div>
+        <div class="toc-sections">
+          <div class="toc-section">
+            <a href="#section-594a7e9a-6e69-41f7-a327-564239c9d695">Current Economic Situation</a>
+          </div>
+          <div class="toc-section">
+            <a href="#section-6bb1704e-9707-41a5-bd1a-fbd3bf403b81">Post-Conflict Economic Landscape</a>
+          </div>
+          <div class="toc-section">
+            <a href="#section-f7468e57-e040-4740-bd45-f230c42d302c">Stability of Currency and Bank System</a>
+          </div>
+          <div class="toc-section">
+            <a href="#section-951a1495-a2aa-43d8-b3c0-03871a1a0d68">Employment</a>
+          </div>
+        </div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-title">Politics</div>
+        <div class="toc-sections">
+          <div class="toc-section">
+            <a href="#section-275452ba-28da-46cb-9f76-8c946ce9f665">Governance Structures and Rule of Law</a>
+          </div>
+          <div class="toc-section">
+            <a href="#section-23883428-491f-4e54-a511-85645c44aa90">Political Freedoms and Recent Laws</a>
+          </div>
+          <div class="toc-section">
+            <a href="#section-6bd85af1-bffa-47c1-976c-b96a06b03b31">Influence of Non-State Actors and Political Factions</a>
+          </div>
+          <div class="toc-section">
+            <a href="#section-731846ff-7d13-493e-843b-8668cadfb6b9">Public Trust in State Institutions</a>
+          </div>
+          <div class="toc-section">
+            <a href="#section-07efbef5-1f2a-4e6d-bdd5-2a118b19fc69">Role of Marginalized Groups</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Content -->
+    <div class="group first-group">
+      <h2 class="group-title">Economy</h2>
+      
+      <div class="content-block">
+          <p>## Current Economic Situation
+
+Lebanon remains in a deep economic crisis characterized by a severe contraction in GDP to about $18 billion and inflation reaching 180% as of March 2025. The crisis is compounded by banking restrictions that have frozen approximately $100 billion in deposits. High-level officials, including Finance Minister Yassine Jaber and the newly appointed Central Bank Governor Karim Souaid, are negotiating an IMF rescue package centered on an Extended Facility Agreement of $3 billion—conditional on rapid reform implementation and legislative amendments, with joint parliamentary sessions scheduled ahead of the IMF conference from 21 to 26 April 2025.
+## Post-Conflict Economic Landscape
+
+In the post‐conflict era, Lebanon faces severe economic challenges with GDP dropping from $20 billion in 2023 to $18 billion in 2025 and sustained inflation at 180% by March 2025. Banking reforms—aimed at restructuring the sector and lifting restrictions on $100 billion of frozen deposits which have been in place since 2019—are under discussion with expected parliamentary approval by mid‐April 2025. The agricultural sector is especially hard hit, needing an estimated $263 million in reconstruction funds (with $95 million earmarked for 2025/2026) and supportive local initiatives such as a cooperative in Saida (hiring 50 youth in March 2025 with a $2 million Qatari fund). Additionally, foreign aid is under strain; a 90‐day suspension of USAID programs in January 2025 and subsequent funding cuts by several European countries are notable, even as the IMF offers conditional support of $3 billion over 46 months. Efforts to reintegrate the workforce, such as the ‘Return to the Cedar’ initiative, have struggled, registering only 2,000 returnee applications against an expected 10,000, while about 15% of the working population has migrated over the past five years.
+## Stability of Currency and Bank System
+
+Lebanon’s monetary system is under intense pressure with the Lebanese pound depreciating sharply from its pre-crisis rate of approximately 1,507.5 LBP/USD to between 89,000 and 90,000 LBP/USD in both official and parallel markets. Bank deposits have fallen from $170 billion in 2019 to an estimated $125 billion by March 2025, and inflation remains in the triple digits despite a slight downward trend following the end of monetary financing by the Bank of Lebanon. Urgent reform measures include the adoption of draft banking laws expected to be approved mid‐April, aimed at restructuring the sector, unifying exchange rates, and protecting depositors (noting that 5% of accounts hold 65% of deposits, around $81 billion in 2023). A full audit of the central bank is underway under Governor Karim Souaid, revealing a decline in reserves from $31 billion in August 2019 to $8 billion in July 2023, a capital gap of $51.3 billion as of February 2025, and an earlier foreign exchange gap of $71.9 billion, all of which are critical for unlocking the IMF rescue plan.
+## Employment
+
+Employment challenges are acute, with trade unions and labor representatives meeting on 11 April 2025 to discuss minimum wage issues amid an economic collapse. While raising wage ceilings to $1,000 has been deemed unfeasible, many citizens are struggling on incomes as low as $300. The impact on businesses is evident, as seen in a Beirut-based software start-up that dismissed 20 employees in April 2025. Broader labor market trends indicate a 15% reduction in the workforce since 2020, highlighting the urgent need for reforms and targeted incentives to stem the ongoing attrition.</p>
+        
+      </div>
+      
+      <div class="sources-section">
+        <h3 class="sources-title">Sources:</h3>
+        <ul class="source-list">
+          <li class="source-item">Why is it necessary to support the President of the Republic?</li>
+          <li class="source-item">Voices of Vulnerability: A Needs Assessment in Lebanon&#x27;s Akkar, Bekaa and Southern Regions</li>
+          <li class="source-item">Food inflation increased by 6.8 per cent in January 2025 in Lebanon</li>
+          <li class="source-item">Lebanon awaits the American response to its proposals for the south, Ortagos, the day after her visit: &quot;The Party&quot; is cancer.</li>
+          <li class="source-item">The depositors are the first victim: who planted the poison in the bank reform project?</li>
+          <li class="source-item">Border arrest: Lebanese army intensifyes its fight against human trafficking</li>
+          <li class="source-item">WFP RAM | Food Security Analysis - Lebanon Market Monitor, February 2025</li>
+          <li class="source-item">The Government approves &quot;bank structure&quot;: protecting small depositors is a priority</li>
+          <li class="source-item">Asian Migrant Women Are Trapped in Lebanon’s Abusive ‘Kafala’ System</li>
+          <li class="source-item">A warning against repeating the 2017 experiment... of Lebanon on the New York footsteps?</li>
+          <li class="source-item">Lack of information on monitoring financial transparency: information not available!</li>
+        </ul>
+      </div>
+    </div>
+    <div class="group ">
+      <h2 class="group-title">Politics</h2>
+      
+      <div class="content-block">
+          <p>## Governance Structures and Rule of Law
+
+Recent developments in Lebanon illustrate a complex interplay between institutional reforms, legislative initiatives, and enduring challenges in transparency and accountability. Notable milestones include the election of President Joseph Aoun on 9 January 2025 with 99 out of 128 votes and the appointment of Prime Minister Nawaf Salam on 8 February 2025, leading a government of 24 ministers confirmed by 95 votes on 26 February 2025. A directive issued on 15 March 2025 requires municipalities to prepare financial reports by May, underscoring efforts to enhance public sector accountability. Legislative initiatives are underway, including a draft law aimed at guaranteeing the independence of the judiciary to reinforce constitutional protections and a reform package that seeks to amend the bank secrecy law and address a financial gap in line with international expectations and IMF negotiations initiated in March 2025. At the same time, longstanding challenges persist, such as weak implementation of anti‐corruption measures despite the existence of bodies like the national anti‐corruption commission (NACC) and the public procurement authority (PPA). Structural transparency deficits have been highlighted in cases like the municipality of Baalbek, where 5,000 aid submission names included 1,400 duplicates, suggesting potential manipulation. Furthermore, breaches related to the constitutional separation of powers and a judicial decision by investigating judge Bilal Hillawy in Beirut against former Central Bank Governor Riad Salama for the alleged embezzlement of $44 million testify to the ongoing tensions between reformist intentions and systemic obstacles.
+## Political Freedoms and Recent Laws
+
+On 7 April 2025, local newspapers reported several significant measures that impact political freedoms and the legal landscape. Among these, plans by the Minister of Communications to impose new charges on Internet‐related services point to increased state oversight of digital communications. In parallel, Hezbollah continues to restrict media professionals in the southern suburbs of Beirut by requiring explicit permission from an official media office for filming. Additionally, an exception remains in place regarding the travel ban on Gulf nationals amid the context of Israeli strikes—exemplified by an Israeli attack in Saida and the assassination of a Hamas official. A symposium titled 'Independence and Reform of the Judiciary' was scheduled for 10 April 2025 at the headquarters of the Cultural Council of Southern Lebanon in Beirut, signaling efforts to strengthen constitutional and judicial protections. Legal actions have also been initiated against 151 activists, including 82 Lebanese, who are accused of charges such as communication with the enemy and incitement to violence, reflecting the politically charged use of penal laws.
+## Influence of Non-State Actors and Political Factions
+
+The political landscape in Lebanon has experienced a notable intensification of factional dynamics and the influence of non‐state actors. On 2 April 2025, a meeting of the Lebanese Forces raised concerns regarding an unbalanced city council reflective of growing fragmentation. This is compounded by the rise of independent political groups such as Beirut Madinati, which, building on historical support that yielded 47,000 votes in 2016, has recently attracted hundreds of participants at public meetings. Discussions initiated on 28 March 2025 for a sovereignist alliance between the Lebanese Forces and moderate Sunni groups have underscored deep internal divisions among moderates, further highlighting entrenched factionalism. Additionally, the orchestration of disinformation campaigns via social networks and partisan media has been employed by non‐state actors to manipulate public opinion and exacerbate political fragmentation, adding further complexity to the informal power networks operating alongside formal political structures.
+## Public Trust in State Institutions
+
+Multiple detailed accounts from early to mid‐April 2025 point to a significant erosion of public trust in state institutions. Reports note chaotic handling of issues such as street parking in Beirut and a disorganized municipal approach that has revived calls for measures like re‐adoption of parking meters. The financial sector is under strain, evidenced by a dramatic fall in digital currencies and a reluctance among jewellers to trade gold alloys. The Salam government’s allocation of £50 billion to municipalities, backed by promises of enhanced transparency from President Aoun, is being closely scrutinized by both elected representatives and citizens. A poll commissioned by the Ministry of Information in April 2025 revealed that 62% of the population considers traditional political parties ineffective. Events such as Hezbollah’s gathering of 5,000 people in Haret Hreik on 30 March 2025 and the rising social media momentum for groups like Beirut Madinati, which recently garnered 10,000 subscribers, illustrate alternative mobilizations amid deep-seated institutional disillusionment. Moreover, municipal consultations have noted an 8% surge in voter registration in March 2025, even as official reports highlight severe disruptions in public services: Beirut experienced electricity cuts limiting service to 4 hours per day, water supply available only 3 days per week, and waste collection reaching just 60% of neighborhoods. Historical issues further compound these challenges, with past corruption scandals—such as the diversion of $400 million in Covid-19 aid in 2021 and the disappearance of $300 million in public funds in 2023—continuing to undermine confidence, despite recent IMF negotiations initiated in March 2025 by the new leadership.
+## Role of Marginalized Groups
+
+Evolving political and socio-economic scenarios in Lebanon have underscored both challenges and opportunities for participation among historically disadvantaged and socially excluded groups. In municipal elections, the Beirut City Council is structured to reserve 12 seats for Christians and 12 for Muslims, yet recent trends show shifting engagement patterns. In April 2025, a poll in Beirut highlighted widespread dissatisfaction with traditional parties, a factor that has spurred the rise of independent lists such as Beirut Madinati, which has mobilized support via public meetings and experienced an 8% increase in voter registration in Shia areas. Qualitative narratives have documented that some Christian communities have boycotted elections and voiced deep-seated mistrust of longstanding sectarian practices. Migrant communities—comprising domestic workers and refugees—continue to face severe marginalization. One account detailed the plight of Pavani, a Sri Lankan domestic worker whose situation became perilous following Israeli airstrikes, with only a 30-minute warning, compounded by passport confiscation and language barriers impeding healthcare access. In response, humanitarian actors such as MSF have deployed community health educators from within these migrant groups, leading to a reported doubling of mental health consultations at a Bourj Hammoud clinic compared to the previous year. These findings are further supported by evidence of economic vulnerability, with 72% of respondents in some surveys expressing an urgent need for cash assistance, highlighting the intersecting challenges of social exclusion and crisis-level livelihoods.</p>
+        
+      </div>
+      
+      <div class="sources-section">
+        <h3 class="sources-title">Sources:</h3>
+        <ul class="source-list">
+          <li class="source-item">Voices of Vulnerability: A Needs Assessment in Lebanon&#x27;s Akkar, Bekaa and Southern Regions</li>
+          <li class="source-item">Teacher strike and budget problems: &quot;Education&quot; is helpless and the school year is resting.</li>
+          <li class="source-item">Mitigating corruption in the reconstruction of Lebanon</li>
+          <li class="source-item">Disappointment of Lebanese groups: Shia are taking the Christian Cup in the early 1990s</li>
+          <li class="source-item">Why is it necessary to support the President of the Republic?</li>
+          <li class="source-item">50 years on the anniversary of war: What&#x27;s changed?</li>
+          <li class="source-item">Exodus of Lebanese youth: what consequences for the economic and social fabric?</li>
+          <li class="source-item">Bree and protect the resistance from her weapon!</li>
+          <li class="source-item">The war that was going to be?</li>
+          <li class="source-item">Escalation of Hostilities: Public Health Risks and Challenges</li>
+          <li class="source-item">A detailed round of negotiations... goodbye to the &quot;failure picture&quot;?</li>
+          <li class="source-item">Lack of information on monitoring financial transparency: information not available!</li>
+          <li class="source-item">Harth Solomon writes to Southern: &quot;Shankash will not be lost!</li>
+          <li class="source-item">Beirut Municipal Elections: Possible Scenarios</li>
+          <li class="source-item">Dialogue with Hezbollah is a waste of time. Disarming it is the only option to save Lebanon</li>
+          <li class="source-item">Press: Nawaf Salam and Lebanese sovereignty, cross-reading of recent speeches</li>
+          <li class="source-item">Secrets of local newspapers issued on Monday, 7 April 2025</li>
+          <li class="source-item">50 years after the outbreak of war in Lebanon, Solomon: some parties are authoritarian instruments within each community.</li>
+          <li class="source-item">The Shia of Lebanon: How did the Al-Fafi become the Sultan, the Infidel?</li>
+          <li class="source-item">Municipal elections south on the ruins of war: &quot;Two loyalties.&quot;</li>
+          <li class="source-item">The secrets of local newspapers are today, 10 April 2025.</li>
+          <li class="source-item">Asian Migrant Women Are Trapped in Lebanon’s Abusive ‘Kafala’ System</li>
+          <li class="source-item">Fake news and manipulation of public opinion in Lebanon</li>
+          <li class="source-item">Economic bodies launch an economic paper: towards a new Lebanon</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
