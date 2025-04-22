@@ -1,7 +1,7 @@
 {
-  "name": "lebanon-report-pdf-generator",
+  "name": "gannet-sithub-pdf-generator",
   "version": "1.0.0",
-  "description": "A tool to convert JSON data to beautifully formatted PDFs for Lebanon Operational Environment reports",
+  "description": "A tool to convert JSON data to beautifully formatted PDFs for situational awareness and operational environment reports",
   "main": "json-to-pdf.js",
   "scripts": {
     "start": "node json-to-pdf.js",
@@ -12,7 +12,9 @@
     "json",
     "report",
     "puppeteer",
-    "handlebars"
+    "handlebars",
+    "gannet",
+    "sithub"
   ],
   "author": "",
   "license": "MIT",

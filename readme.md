@@ -1,10 +1,10 @@
-# Lebanon Operational Environment - PDF Generator
+# GANNET SitHub PDF Generator
 
-This tool automatically converts the Weekly Export JSON data into professionally formatted PDF reports. It uses HTML/CSS for styling and Puppeteer for PDF generation.
+This tool automatically converts JSON data into professionally formatted PDF reports for situational awareness and operational environments. It uses HTML/CSS for styling and Puppeteer for PDF generation.
 
 ## Features
 
-- **JSON Parsing**: Automatically reads and parses the Weekly_export.json file
+- **JSON Parsing**: Automatically reads and parses exported JSON data
 - **HTML Templates**: Uses Handlebars templates for consistent formatting
 - **Markdown Support**: Properly renders Markdown content within the JSON
 - **Table of Contents**: Automatically generates a clickable table of contents
@@ -36,7 +36,7 @@ To generate a basic PDF report:
 node json-to-pdf.js
 ```
 
-This will create `Lebanon_Operational_Environment.pdf` in the project directory.
+This will create a PDF report in the project directory.
 
 ### Advanced PDF with Table of Contents
 
@@ -46,7 +46,7 @@ To generate an enhanced PDF with table of contents:
 node advanced-json-to-pdf.js
 ```
 
-This will create `Lebanon_Operational_Environment_Advanced.pdf` in the project directory.
+This will create an advanced PDF report with table of contents in the project directory.
 
 ## Configuration
 
@@ -77,6 +77,16 @@ The solution can be extended to handle:
 - Excel files (using ExcelJS or SheetJS)
 - CSV files (using csv-parser)
 - API data (using axios or fetch)
+
+## Use Cases
+
+This PDF generator can be used for various situational reporting needs:
+- Regional conflict analysis
+- Humanitarian situation reports
+- Security assessments
+- Environmental monitoring reports
+- Crisis management briefings
+- Operational planning documents
 
 ## Troubleshooting
 

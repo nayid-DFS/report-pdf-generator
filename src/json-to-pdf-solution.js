@@ -6,7 +6,7 @@ const handlebars = require('handlebars');
 
 async function generatePDF() {
   try {
-    // Read and parse the JSON file
+    // Read and parse the JSON data file
     const jsonData = fs.readFileSync(path.join(__dirname, 'Weekly_export.json'), 'utf8');
     const data = JSON.parse(jsonData);
     
@@ -30,7 +30,7 @@ async function generatePDF() {
     
     // Generate PDF with proper styling and formatting
     await page.pdf({
-      path: path.join(__dirname, 'Lebanon_Operational_Environment.pdf'),
+      path: path.join(__dirname, 'GANNET_SitHub_Report.pdf'),
       format: 'A4',
       margin: {
         top: '20mm',
@@ -40,7 +40,7 @@ async function generatePDF() {
       },
       printBackground: true,
       displayHeaderFooter: true,
-      headerTemplate: '<div style="font-size: 10px; text-align: center; width: 100%;">Lebanon Operational Environment Report</div>',
+      headerTemplate: '<div style="font-size: 10px; text-align: center; width: 100%;">GANNET SitHub Report</div>',
       footerTemplate: '<div style="font-size: 10px; text-align: center; width: 100%;">Page <span class="pageNumber"></span> of <span class="totalPages"></span></div>'
     });
     

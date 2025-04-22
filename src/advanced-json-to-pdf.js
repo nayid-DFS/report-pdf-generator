@@ -18,7 +18,7 @@ handlebars.registerHelper('uniqueId', function() {
 
 async function generateAdvancedPDF() {
   try {
-    // Read and parse the JSON file
+    // Read and parse the JSON data file
     const jsonData = fs.readFileSync(path.join(__dirname, 'Weekly_export.json'), 'utf8');
     const data = JSON.parse(jsonData);
     
@@ -66,7 +66,7 @@ async function generateAdvancedPDF() {
     
     // Generate PDF with proper styling and formatting
     await page.pdf({
-      path: path.join(__dirname, 'Lebanon_Operational_Environment_Advanced.pdf'),
+      path: path.join(__dirname, 'GANNET_SitHub_Report_Advanced.pdf'),
       format: 'A4',
       margin: {
         top: '25mm',
@@ -78,7 +78,7 @@ async function generateAdvancedPDF() {
       displayHeaderFooter: true,
       headerTemplate: `
         <div style="font-size: 9px; width: 100%; text-align: center; margin: 0 50px;">
-          <span>Lebanon Operational Environment</span>
+          <span>GANNET SitHub Report</span>
         </div>
       `,
       footerTemplate: `
