@@ -61,6 +61,26 @@ function isSectoralAnalysisGroup(title) {
   );
 }
 
+// Helper function to encode image as base64
+function getBase64Image(filePath) {
+  try {
+    // Check if file exists
+    if (fs.existsSync(filePath)) {
+      // Read file and convert to base64
+      const imageData = fs.readFileSync(filePath);
+      const base64Image = Buffer.from(imageData).toString('base64');
+      const imageType = path.extname(filePath).substring(1); // remove the dot
+      return `data:image/${imageType};base64,${base64Image}`;
+    } else {
+      console.warn(`Image file not found: ${filePath}`);
+      return ''; // Return empty if file doesn't exist
+    }
+  } catch (error) {
+    console.error(`Error processing image ${filePath}:`, error);
+    return ''; // Return empty on error
+  }
+}
+
 async function generateAdvancedPDF() {
   try {
     // Read and parse the JSON data file
@@ -211,6 +231,13 @@ async function generateAdvancedPDF() {
       groups: sectoralAnalysis.groups.map(group => processGroup(group, sectoralAnalysis.title))
     };
     
+    // Get base64 encoded logos for the cover page
+    const gannetLogoPath = path.join(__dirname, '..', 'public', 'images', 'gannet-logo.png');
+    const partnerLogoPath = path.join(__dirname, '..', 'public', 'images', 'partner-logo.png');
+    
+    const gannetLogoBase64 = getBase64Image(gannetLogoPath);
+    const partnerLogoBase64 = getBase64Image(partnerLogoPath);
+    
     // Process data to create table of contents entries
     const processedData = {
       // Always set the general title to "Situational Analysis"
@@ -233,7 +260,11 @@ async function generateAdvancedPDF() {
       hasConsolidatedSources: allSources.length > 0,
       
       // Pass the groups with sources set
-      groupsWithSources: Array.from(groupsWithSources)
+      groupsWithSources: Array.from(groupsWithSources),
+      
+      // Add logo images as base64 data
+      gannetLogoBase64: gannetLogoBase64,
+      partnerLogoBase64: partnerLogoBase64
     };
     
     // Compile the template with Handlebars
@@ -250,8 +281,32 @@ async function generateAdvancedPDF() {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     
-    // Add custom styles for print
-    await page.setContent(html, { waitUntil: 'networkidle0' });
+    // Set the base path for resolving relative URLs
+    const basePath = `file://${path.resolve(__dirname, '..')}`;
+    
+    // First load the HTML without waiting for resources to check images
+    await page.setContent(html);
+    
+    // Intercept requests to handle relative image paths
+    await page.setRequestInterception(true);
+    page.on('request', request => {
+      if (request.resourceType() === 'image') {
+        const url = request.url();
+        if (url.includes('../public/images/')) {
+          // Replace relative path with absolute path
+          const newUrl = url.replace('../public/images/', `${basePath}/public/images/`);
+          request.continue({ url: newUrl });
+          return;
+        }
+      }
+      request.continue();
+    });
+    
+    // Now load the content with proper waiting
+    await page.setContent(html, { 
+      waitUntil: 'networkidle0',
+      baseURL: basePath
+    });
     
     // Add special attributes for PDF navigation to ensure proper ToC linking
     await page.evaluate(() => {
@@ -292,14 +347,14 @@ async function generateAdvancedPDF() {
             const targetId = href.substring(1);
             link.setAttribute('data-internal-link', 'true');
             // Style internal links differently
-            link.style.color = '#000066';
+            link.style.color = '#00664d';
             link.style.textDecoration = 'none';
             link.style.fontWeight = 'normal';
           } else {
             // External link
             link.setAttribute('data-href', href);
-            // Make sure links are blue and underlined
-            link.style.color = '#0066cc';
+            // Make sure links are green and underlined
+            link.style.color = '#008866';
             link.style.textDecoration = 'underline';
           }
         }
@@ -309,12 +364,12 @@ async function generateAdvancedPDF() {
     // Generate PDF with proper styling and formatting
     await page.pdf({
       path: outputPdfPath,
-      format: 'A4',
+      format: 'Letter', // Use Letter page size instead of A4
       margin: {
-        top: '25mm',
-        right: '20mm',
+        top: '15mm',     // Reduced by 40% from 25mm
+        right: '12mm',   // Reduced by 40% from 20mm
         bottom: '25mm',
-        left: '20mm'
+        left: '12mm'     // Reduced by 40% from 20mm
       },
       printBackground: true,
       displayHeaderFooter: true,

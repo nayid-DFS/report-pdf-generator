@@ -55,20 +55,36 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100vh;
-      padding: 40px;
+      height: 95vh; /* Reduced height to ensure it fits on one page */
+      padding: 20px; /* Reduced padding */
       page-break-after: always;
+      background-color: #e6f5f0; /* Light green background */
     }
     
     .cover-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 30px;
+      margin-bottom: 20px; /* Reduced margin */
     }
     
     .logo {
-      height: 60px;
+      height: 50px; /* Slightly reduced logo size */
+      max-width: 200px;
+      object-fit: contain;
+    }
+    
+    .logo-placeholder {
+      height: 50px;
+      width: 150px;
+      background-color: #008866;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 5px;
     }
     
     .cover-content {
@@ -84,14 +100,14 @@
       font-family: 'Merriweather', serif;
       font-size: 32px;
       font-weight: 700;
-      color: #003366;
+      color: #00664d;
       margin-bottom: 20px;
       text-align: center;
     }
     
     .cover-subtitle {
       font-size: 20px;
-      color: #006699;
+      color: #008866;
       margin-bottom: 10px;
       text-align: center;
     }
@@ -107,17 +123,17 @@
       font-size: 11px;
       color: #666;
       text-align: center;
-      margin-top: 30px;
+      margin-top: 20px; /* Reduced margin */
     }
     
     /* Original styles */
     .report-title {
       text-align: center;
-      color: #003366;
+      color: #00664d;
       font-size: 24px;
       font-weight: 700;
       margin-bottom: 20px;
-      border-bottom: 2px solid #003366;
+      border-bottom: 2px solid #00664d;
       padding-bottom: 10px;
       font-family: 'Merriweather', serif;
     }
@@ -133,9 +149,9 @@
     .toc-title {
       font-size: 18px;
       font-weight: 700;
-      color: #003366;
+      color: #00664d;
       margin-bottom: 15px;
-      border-bottom: 1px solid #003366;
+      border-bottom: 1px solid #00664d;
       padding-bottom: 5px;
       font-family: 'Merriweather', serif;
     }
@@ -151,9 +167,9 @@
     .toc-main-category-title {
       font-size: 18px;
       font-weight: 600;
-      color: #003366;
+      color: #00664d;
       margin: 20px 0 10px 0;
-      border-bottom: 1px solid #003366;
+      border-bottom: 1px solid #00664d;
       padding-bottom: 5px;
       font-family: 'Merriweather', serif;
     }
@@ -161,7 +177,7 @@
     .toc-group-title {
       font-size: 16px;
       font-weight: 500;
-      color: #006699;
+      color: #008866;
       margin-bottom: 10px;
       margin-left: 15px;
     }
@@ -186,8 +202,8 @@
     
     .toc-section a:hover {
       text-decoration: underline;
-      color: #006699;
-      border-left: 2px solid #006699;
+      color: #008866;
+      border-left: 2px solid #008866;
       padding-left: 8px;
     }
     
@@ -209,23 +225,23 @@
     }
     
     .main-category-title {
-      color: #003366;
+      color: #00664d;
       font-size: 24px;
       font-weight: 700;
       margin: 30px 0 20px 0;
       text-align: center;
-      border-bottom: 2px solid #003366;
+      border-bottom: 2px solid #00664d;
       padding-bottom: 8px;
       font-family: 'Merriweather', serif;
       page-break-before: always;
     }
     
     .group-title {
-      color: #003366;
+      color: #00664d;
       font-size: 20px;
       font-weight: 500;
       margin-bottom: 15px;
-      border-bottom: 1px solid #003366;
+      border-bottom: 1px solid #00664d;
       padding-bottom: 5px;
       font-family: 'Merriweather', serif;
     }
@@ -239,7 +255,7 @@
     }
     
     h2 {
-      color: #006699;
+      color: #008866;
       font-size: 18px;
       font-weight: 500;
       margin-top: 20px;
@@ -288,7 +304,7 @@
     }
     
     .source-url a {
-      color: #0066cc;
+      color: #008866;
       text-decoration: none;
       font-weight: normal;
     }
@@ -312,7 +328,7 @@
     .source-group-title {
       font-size: 14px;
       font-weight: 500;
-      color: #006699;
+      color: #008866;
       margin-bottom: 5px;
       border-bottom: 1px solid #dddddd;
       padding-bottom: 3px;
@@ -328,12 +344,12 @@
       padding: 15px;
       border-radius: 5px;
       margin-bottom: 20px;
-      border-left: 3px solid #006699;
+      border-left: 3px solid #008866;
     }
     
     /* Styling for content */
     .content-block h2 {
-      color: #006699;
+      color: #008866;
       font-size: 18px;
       font-weight: 500;
       margin-top: 20px;
@@ -357,7 +373,7 @@
     
     /* Markdown formatting */
     .markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
-      color: #006699;
+      color: #008866;
       font-family: 'Merriweather', serif;
       margin-top: 1em;
       margin-bottom: 0.5em;
@@ -410,18 +426,18 @@
     /* PDF-specific link styling */
     @media print {
       a {
-        color: #0066cc !important;
+        color: #008866 !important;
         text-decoration: underline !important;
       }
       
       .source-url a {
-        color: #0066cc !important;
+        color: #008866 !important;
         text-decoration: underline !important;
         word-break: break-all;
       }
       
       .toc-section a {
-        color: #000066 !important;
+        color: #00664d !important;
         text-decoration: none !important;
       }
     }
@@ -433,9 +449,9 @@
     .source-category-title {
       font-size: 20px;
       font-weight: 600;
-      color: #003366;
+      color: #00664d;
       margin: 25px 0 15px 0;
-      border-bottom: 1px solid #003366;
+      border-bottom: 1px solid #00664d;
       padding-bottom: 5px;
       font-family: 'Merriweather', serif;
     }
@@ -443,7 +459,7 @@
     .source-group-title {
       font-size: 16px;
       font-weight: 500;
-      color: #006699;
+      color: #008866;
       margin: 15px 0 10px 0;
       border-bottom: 1px solid #dddddd;
       padding-bottom: 3px;
@@ -454,8 +470,17 @@
   <!-- Cover Page -->
   <div class="cover-page">
     <div class="cover-header">
-      <img src="file:///Users/nayid/Documents/GANNET_Test/report-pdf-generator/public/images/gannet-logo.svg" alt="GANNET Logo" class="logo">
-      <img src="file:///Users/nayid/Documents/GANNET_Test/report-pdf-generator/public/images/partner-logo.svg" alt="Partner Logo" class="logo">
+      {{#if gannetLogoBase64}}
+      <img src="{{gannetLogoBase64}}" alt="GANNET Logo" class="logo">
+      {{else}}
+      <div class="logo-placeholder">GANNET</div>
+      {{/if}}
+      
+      {{#if partnerLogoBase64}}
+      <img src="{{partnerLogoBase64}}" alt="Partner Logo" class="logo">
+      {{else}}
+      <div class="logo-placeholder">Partner</div>
+      {{/if}}
     </div>
     
     <div class="cover-content">
@@ -465,7 +490,7 @@
     </div>
     
     <div class="cover-footer">
-      <p>GANNET SitHub &copy; {{currentYear}} | Confidential</p>
+      <p>GANNET SitHub &copy; {{currentYear}}</p>
     </div>
   </div>
 
