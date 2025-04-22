@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:wght@400;700&display=swap');
+    
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      font-size: 12px;
+    }
+    
+    .container {
+      max-width: 100%;
+      padding: 10px;
+    }
+    
+    .report-title {
+      text-align: center;
+      color: #003366;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #003366;
+      padding-bottom: 10px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .toc-container {
+      margin: 20px 0 40px;
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      page-break-after: always;
+    }
+    
+    .toc-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #003366;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #003366;
+      padding-bottom: 5px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .toc-group {
+      margin-bottom: 15px;
+    }
+    
+    .toc-group-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #006699;
+      margin-bottom: 10px;
+    }
+    
+    .toc-sections {
+      margin-left: 20px;
+    }
+    
+    .toc-section {
+      margin-bottom: 5px;
+    }
+    
+    .toc-section a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .toc-section a:hover {
+      text-decoration: underline;
+    }
+    
+    .toc-page {
+      float: right;
+    }
+    
+    .group {
+      margin-bottom: 30px;
+      page-break-before: always;
+    }
+    
+    .first-group {
+      page-break-before: avoid;
+    }
+    
+    .group-title {
+      color: #003366;
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #003366;
+      padding-bottom: 5px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .section {
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      color: #006699;
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    .sources-section {
+      margin-top: 20px;
+      border-top: 1px dashed #ccc;
+      padding-top: 10px;
+    }
+    
+    .sources-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #666;
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .source-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    .source-item {
+      margin-bottom: 5px;
+      font-size: 11px;
+      color: #666;
+    }
+    
+    .page-break {
+      page-break-after: always;
+    }
+    
+    /* Content styling */
+    .content-block {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border-left: 3px solid #006699;
+    }
+    
+    /* Styling for Markdown content */
+    .content-block h2 {
+      color: #006699;
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .content-block p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    .content-block ul, .content-block ol {
+      margin-bottom: 15px;
+      padding-left: 20px;
+    }
+    
+    .content-block li {
+      margin-bottom: 5px;
+    }
+    
+    /* Better styling for document header/footer */
+    @page {
+      margin: 25mm 20mm;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="report-title">{{title}}</h1>
+    
+    <!-- Table of Contents -->
+    <div class="toc-container">
+      <h2 class="toc-title">Table of Contents</h2>
+      
+      {{#each groups}}
+      <div class="toc-group">
+        <div class="toc-group-title">{{this.title}}</div>
+        <div class="toc-sections">
+          {{#each this.headings}}
+          <div class="toc-section">
+            <a href="#{{this.id}}">{{this.title}}</a>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    
+    <!-- Content -->
+    {{#each groups}}
+    <div class="group {{#if @first}}first-group{{/if}}">
+      <h2 class="group-title">{{this.title}}</h2>
+      
+      <div class="content-block">
+        {{! Process the content as Markdown and inject the IDs for TOC links }}
+        {{#markdown}}
+          {{! Loop through the content and add IDs to the headings }}
+          {{#each ../headings}}
+          ## {{this.title}} {#{{this.id}}}
+          {{/each}}
+          
+          {{{../content}}}
+        {{/markdown}}
+      </div>
+      
+      {{#if this.sources}}
+      <div class="sources-section">
+        <h3 class="sources-title">Sources:</h3>
+        <ul class="source-list">
+          {{#each this.sources}}
+          <li class="source-item">{{this.title}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+    </div>
+    {{/each}}
+  </div>
+</body>
+</html>

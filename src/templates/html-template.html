@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+    
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+    }
+    
+    .container {
+      max-width: 100%;
+      padding: 20px;
+    }
+    
+    .report-title {
+      text-align: center;
+      color: #003366;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #003366;
+      padding-bottom: 10px;
+    }
+    
+    .group {
+      margin-bottom: 30px;
+      page-break-inside: avoid;
+    }
+    
+    .group-title {
+      color: #003366;
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #003366;
+      padding-bottom: 5px;
+    }
+    
+    .section {
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      color: #006699;
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    .sources-section {
+      margin-top: 20px;
+      border-top: 1px dashed #ccc;
+      padding-top: 10px;
+    }
+    
+    .sources-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    
+    .source-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    .source-item {
+      margin-bottom: 5px;
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .page-break {
+      page-break-after: always;
+    }
+    
+    /* Additional styling for better content reading */
+    .content-block {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border-left: 3px solid #006699;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="report-title">{{title}}</h1>
+    
+    {{#each groups}}
+    <div class="group">
+      <h2 class="group-title">{{this.title}}</h2>
+      
+      <div class="content-block">
+        {{{this.content}}}
+      </div>
+      
+      {{#if this.sources}}
+      <div class="sources-section">
+        <h3 class="sources-title">Sources:</h3>
+        <ul class="source-list">
+          {{#each this.sources}}
+          <li class="source-item">{{this.title}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+    </div>
+    
+    {{#unless @last}}
+    <div class="page-break"></div>
+    {{/unless}}
+    {{/each}}
+  </div>
+</body>
+</html>

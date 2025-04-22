@@ -1,0 +1,23 @@
+{
+  "name": "lebanon-report-pdf-generator",
+  "version": "1.0.0",
+  "description": "A tool to convert JSON data to beautifully formatted PDFs for Lebanon Operational Environment reports",
+  "main": "json-to-pdf.js",
+  "scripts": {
+    "start": "node json-to-pdf.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pdf",
+    "json",
+    "report",
+    "puppeteer",
+    "handlebars"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "puppeteer": "^21.5.0"
+  }
+}
