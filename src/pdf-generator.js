@@ -11,15 +11,33 @@ handlebars.registerHelper('uniqueId', function() {
   return uuidv4();
 });
 
-// Register helper for formatting dates
-handlebars.registerHelper('formatDate', function(format) {
-  const date = new Date();
-  const options = { 
+// Register helper for formatting dates - modified to use a global variable for consistency
+let globalReportDate = '';
+
+handlebars.registerHelper('formatDate', function() {
+  // Always use the global report date for consistency
+  if (globalReportDate) {
+    try {
+      const date = new Date(globalReportDate);
+      if (!isNaN(date.getTime())) {
+        const options = { 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        };
+        return date.toLocaleDateString('en-US', options);
+      }
+    } catch (e) {
+      console.error('Error parsing date in helper:', e);
+    }
+  }
+  
+  // Fallback to current date if there's any issue
+  return new Date().toLocaleDateString('en-US', { 
     year: 'numeric', 
     month: 'long', 
     day: 'numeric' 
-  };
-  return date.toLocaleDateString('en-US', options);
+  });
 });
 
 // Register comparison helper for template
@@ -81,11 +99,50 @@ function getBase64Image(filePath) {
   }
 }
 
-async function generateAdvancedPDF() {
+// Helper function to format date consistently
+function formatDateString(dateStr) {
   try {
+    let date;
+    if (dateStr && typeof dateStr === 'string') {
+      date = new Date(dateStr);
+      if (isNaN(date.getTime())) {
+        date = new Date();
+      }
+    } else {
+      date = new Date();
+    }
+    
+    const options = { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    };
+    
+    return date.toLocaleDateString('en-US', options);
+  } catch (e) {
+    return new Date().toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  }
+}
+
+async function generateAdvancedPDF(country = 'COUNTRY', reportDate = '') {
+  try {
+    // Set the global report date for use in the Handlebars helper
+    globalReportDate = reportDate;
+    
     // Read and parse the JSON data file
     const jsonData = fs.readFileSync(path.join(__dirname, 'Weekly_export.json'), 'utf8');
     const data = JSON.parse(jsonData);
+    
+    // Log the input date for debugging
+    console.log('Input report date:', reportDate);
+    
+    // Format date consistently for both template and footer
+    const formattedDate = formatDateString(reportDate);
+    console.log('Formatted date:', formattedDate);
     
     // Read the HTML template
     const templateHtml = fs.readFileSync(path.join(__dirname, 'templates', 'advanced-html-template.html'), 'utf8');
@@ -242,11 +299,9 @@ async function generateAdvancedPDF() {
     const processedData = {
       // Always set the general title to "Situational Analysis"
       title: "Situational Analysis",
-      formatDate: new Date().toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      }),
+      country: country.toUpperCase(), // Add country parameter
+      reportDate: reportDate,
+      formatDate: formattedDate,
       currentYear: new Date().getFullYear(),
       
       // Pass the main categories with their groups
@@ -269,7 +324,15 @@ async function generateAdvancedPDF() {
     
     // Compile the template with Handlebars
     const template = handlebars.compile(templateHtml);
-    const html = template(processedData);
+    let html = template(processedData);
+    
+    // Directly fix the date in the cover page by replacing it
+    if (reportDate) {
+      // Find the date on the cover page and replace it
+      const dateRegex = /<p class="date">.*?<\/p>/;
+      html = html.replace(dateRegex, `<p class="date">${formattedDate}</p>`);
+      console.log('Directly injected date into cover page');
+    }
     
     // Write the HTML to a temporary file (for debugging)
     fs.writeFileSync(path.join(__dirname, '..', 'output', 'advanced-output.html'), html);
@@ -374,13 +437,22 @@ async function generateAdvancedPDF() {
       printBackground: true,
       displayHeaderFooter: true,
       headerTemplate: `
-        <div style="font-size: 9px; width: 100%; text-align: center; margin: 0 50px;">
-          <span>GANNET SitHub Report</span>
+        <div style="font-size: 9px; width: 100%; text-align: center; margin: 0 50px; visibility: hidden;">
+          <!-- Header intentionally hidden -->
         </div>
       `,
       footerTemplate: `
-        <div style="font-size: 9px; width: 100%; text-align: center; margin: 0 50px;">
-          <span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span>
+        <div style="width: 100%; font-size: 13.5px; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif;">
+          <script>
+            // Hide footer on first page
+            if (document.querySelector('.pageNumber').textContent === '1') {
+              document.currentScript.parentElement.style.visibility = 'hidden';
+            }
+          </script>
+          <div style="display: flex; justify-content: space-between; width: calc(100% - 24mm); margin: 0 12mm;">
+            <div style="text-align: justify;">${country} Crisis | Situational Analysis | ${formattedDate}</div>
+            <div style="text-align: justify;"><span class="pageNumber"></span></div>
+          </div>
         </div>
       `,
       preferCSSPageSize: true,

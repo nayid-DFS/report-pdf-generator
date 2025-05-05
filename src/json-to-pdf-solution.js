@@ -40,8 +40,8 @@ async function generatePDF() {
       },
       printBackground: true,
       displayHeaderFooter: true,
-      headerTemplate: '<div style="font-size: 10px; text-align: center; width: 100%;">GANNET SitHub Report</div>',
-      footerTemplate: '<div style="font-size: 10px; text-align: center; width: 100%;">Page <span class="pageNumber"></span> of <span class="totalPages"></span></div>'
+      headerTemplate: '<div style="font-size: 10px; text-align: center; width: 100%; visibility: hidden;"><!-- Header intentionally hidden --></div>',
+      footerTemplate: '<div style="display: flex; justify-content: space-between; width: 100%; font-size: 10px; padding: 0 20mm; box-sizing: border-box;"><script>if (document.querySelector(".pageNumber").textContent === "1") { document.currentScript.parentElement.style.visibility = "hidden"; }</script><div style="text-align: left;">[COUNTRY] Crisis | Situational Analysis | {{formatDate}}</div><div style="text-align: left;">Page <span class="pageNumber"></span></div></div>'
     });
     
     await browser.close();

@@ -132,13 +132,20 @@ async function generateAdvancedPDF() {
       printBackground: true,
       displayHeaderFooter: true,
       headerTemplate: `
-        <div style="font-size: 9px; width: 100%; text-align: center; margin: 0 50px;">
-          <span>GANNET SitHub Report</span>
+        <div style="font-size: 9px; width: 100%; text-align: center; margin: 0 50px; visibility: hidden;">
+          <!-- Header intentionally hidden -->
         </div>
       `,
       footerTemplate: `
-        <div style="font-size: 9px; width: 100%; text-align: center; margin: 0 50px;">
-          <span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span>
+        <div style="display: flex; justify-content: space-between; width: 100%; font-size: 9px; padding: 0 20mm; box-sizing: border-box;">
+          <script>
+            // Hide footer on first page
+            if (document.querySelector('.pageNumber').textContent === '1') {
+              document.currentScript.parentElement.style.visibility = 'hidden';
+            }
+          </script>
+          <div style="text-align: left;">[COUNTRY] Crisis | Situational Analysis | {{formatDate}}</div>
+          <div style="text-align: left;">Page <span class="pageNumber"></span></div>
         </div>
       `
     });

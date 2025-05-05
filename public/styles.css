@@ -170,6 +170,45 @@ main {
   color: white;
 }
 
+/* Report Options */
+.report-options {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.option-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+#country-select, #report-date {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+#country-select:focus, #report-date:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 102, 153, 0.2);
+}
+
 /* Actions */
 .actions {
   display: flex;

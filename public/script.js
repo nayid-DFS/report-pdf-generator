@@ -14,9 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloadLink = document.getElementById('download-link');
   const newFileButton = document.getElementById('new-file-button');
   const currentYearElement = document.getElementById('current-year');
+  const countrySelect = document.getElementById('country-select');
+  const reportDate = document.getElementById('report-date');
   
   // Set current year in footer
   currentYearElement.textContent = new Date().getFullYear();
+  
+  // Set default date to today
+  const today = new Date();
+  const formattedDate = today.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+  reportDate.value = formattedDate;
   
   // Global variables
   let selectedFile = null;
@@ -131,6 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Create form data
       const formData = new FormData();
       formData.append('jsonFile', selectedFile);
+      formData.append('country', countrySelect.value);
+      formData.append('reportDate', reportDate.value);
       
       // Send request to server
       const response = await fetch('/generate-pdf', {

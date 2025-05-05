@@ -57,6 +57,10 @@ app.post('/generate-pdf', upload.single('jsonFile'), async (req, res) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
+    // Get country and date from the form
+    const country = req.body.country || 'COUNTRY';
+    const reportDate = req.body.reportDate || '';
+
     // Validate that the uploaded file is valid JSON
     try {
       const fileContent = fs.readFileSync(req.file.path, 'utf8');
@@ -70,8 +74,8 @@ app.post('/generate-pdf', upload.single('jsonFile'), async (req, res) => {
     const destFilePath = path.join(__dirname, 'src', 'Weekly_export.json');
     fs.copyFileSync(uploadedFilePath, destFilePath);
 
-    // Generate the PDF
-    const pdfPath = await generateAdvancedPDF();
+    // Generate the PDF with country and date parameters
+    const pdfPath = await generateAdvancedPDF(country, reportDate);
     
     res.json({ 
       success: true, 
@@ -98,7 +102,20 @@ app.get('/download/:filename', (req, res) => {
   }
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-}); 
+// Start the server with port fallback mechanism
+const startServer = (portToUse) => {
+  const server = app.listen(portToUse)
+    .on('listening', () => {
+      console.log(`Server running on http://localhost:${portToUse}`);
+    })
+    .on('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+        console.log(`Port ${portToUse} is busy, trying port ${portToUse + 1}`);
+        startServer(portToUse + 1);
+      } else {
+        console.error('Server error:', err);
+      }
+    });
+};
+
+startServer(port); 

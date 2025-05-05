@@ -33,16 +33,16 @@
   });
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;700&display=swap');
     
     body {
-      font-family: 'Roboto', Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
       line-height: 1.6;
       color: #333;
       margin: 0;
       padding: 0;
       background-color: #fff;
-      font-size: 12px;
+      font-size: 9.5pt;
     }
     
     .container {
@@ -54,107 +54,124 @@
     .cover-page {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      height: 95vh; /* Reduced height to ensure it fits on one page */
-      padding: 20px; /* Reduced padding */
+      height: 100vh;
       page-break-after: always;
-      background-color: #308c66; /* Updated green color */
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      max-width: 100%;
+      overflow: hidden;
     }
     
-    .cover-header {
+    .header {
+      background-color: #0e1117;
+      color: #c2ebc4;
+      flex: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      width: 100%;
+      margin: 0;
+    }
+    
+    .title-container {
+      text-align: left;
+      width: 100%;
+      padding-left: 60px;
+    }
+    
+    .title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 5rem;
+      font-weight: bold;
+      margin: 0;
+      line-height: 1;
+      text-align: left;
+    }
+    
+    .subtitle-section {
+      background-color: #c2ebc4;
+      color: #0e1117;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 20px;
+      width: 100%;
+      margin: 0;
+    }
+    
+    .subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.5rem;
+      font-weight: bold;
+      margin: 0;
+      padding-left: 60px;
+      color: black;
+      white-space: nowrap;
+    }
+    
+    .date {
+      font-size: 1.57rem; /* Reduced by 30% from 2.25rem */
+      text-align: right;
+      margin: 0;
+      padding-right: 60px;
+      padding-top: 40px;
+    }
+    
+    .footer {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 40px; /* Increased to accommodate larger logos */
-      width: 100%;
+      align-items: center;
+      padding: 20px 60px;
+      border-top: 1px solid #0e1117;
+      margin-top: 40px;
     }
     
     .logo {
-      height: 225px; /* Increased by another 50% from 150px */
-      max-width: 900px; /* Increased by another 50% from 600px */
+      height: 82px; /* Reduced by 15% from 96px */
+      width: auto;
+      max-width: 164px; /* Reduced by 15% from 193px */
       object-fit: contain;
+      filter: brightness(0); /* Makes the logo black */
+      image-rendering: high-quality;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+      print-color-adjust: exact;
     }
     
-    .logo-placeholder {
-      height: 225px; /* Increased by another 50% from 150px */
-      width: 675px; /* Increased by another 50% from 450px */
-      background-color: #008866;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 48px; /* Increased from 32px */
-      border-radius: 5px;
+    /* Improve SVG rendering in PDFs */
+    svg {
+      shape-rendering: geometricPrecision;
+      text-rendering: geometricPrecision;
     }
     
-    .cover-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      flex-grow: 1;
-      text-align: center;
-    }
-    
-    .cover-title {
-      font-family: 'Merriweather', serif;
-      font-size: 32px;
-      font-weight: 700;
-      color: #ffffff; /* Changed to white */
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    
-    .cover-subtitle {
-      font-size: 20px;
-      color: #e6f5f0; /* Light green */
-      margin-bottom: 10px;
-      text-align: center;
-    }
-    
-    .cover-date {
-      font-size: 16px;
-      color: #e6f5f0; /* Light green */
-      margin-top: 30px;
-      text-align: center;
-    }
-    
-    .cover-footer {
-      font-size: 11px;
-      color: #e6f5f0; /* Light green */
-      text-align: center;
-      margin-top: 20px; /* Reduced margin */
-    }
-    
-    /* Added styles for the country/crisis placeholder */
-    .cover-country {
-      font-size: 18px;
-      color: #ffffff;
-      margin-bottom: 5px;
-      text-align: center;
-      font-weight: 300;
-    }
-    
-    /* Added styles for the date range placeholder */
-    .cover-date-range {
-      font-size: 14px;
-      color: #e6f5f0;
-      margin-top: 5px;
-      text-align: center;
-      font-style: italic;
+    /* Optimize images for print */
+    @media print {
+      img.logo, svg.logo {
+        image-resolution: 300dpi;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-font-smoothing: subpixel-antialiased;
+      }
+      
+      /* Force vector rendering when possible */
+      svg {
+        vector-effect: non-scaling-stroke;
+      }
     }
     
     /* Original styles */
     .report-title {
       text-align: center;
       color: #00664d;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
       margin-bottom: 20px;
       border-bottom: 2px solid #00664d;
       padding-bottom: 10px;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
     }
     
     .toc-container {
@@ -166,17 +183,18 @@
     }
     
     .toc-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       color: #00664d;
       margin-bottom: 15px;
       border-bottom: 1px solid #00664d;
       padding-bottom: 5px;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
     }
     
     .toc-group {
-      margin-bottom: 15px;
+      margin-bottom: 12px; /* Slightly reduced */
+      line-height: 1.2; /* Added for single spacing */
     }
     
     .toc-main-category {
@@ -184,17 +202,17 @@
     }
     
     .toc-main-category-title {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 600;
       color: #00664d;
       margin: 20px 0 10px 0;
       border-bottom: 1px solid #00664d;
       padding-bottom: 5px;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
     }
     
     .toc-group-title {
-      font-size: 16px;
+      font-size: 12px;
       font-weight: 500;
       color: #008866;
       margin-bottom: 10px;
@@ -203,20 +221,23 @@
     
     .toc-sections {
       margin-left: 30px;
+      line-height: 1.2; /* Added for single spacing */
     }
     
     .toc-section {
-      margin-bottom: 5px;
+      margin-bottom: 2px; /* Reduced from 5px for tighter spacing */
+      line-height: 1.2; /* Added for single spacing */
     }
     
     .toc-section a {
       color: #333;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 10px;
       position: relative;
       padding-left: 5px;
       border-left: 2px solid transparent;
       transition: all 0.2s ease;
+      line-height: 1.2; /* Added for single spacing */
     }
     
     .toc-section a:hover {
@@ -227,7 +248,11 @@
     }
     
     .toc-page {
-      float: right;
+      display: none;
+    }
+    
+    .toc-section-title::after {
+      display: none;
     }
     
     .group {
@@ -244,23 +269,23 @@
     
     .main-category-title {
       color: #00664d;
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 700;
       margin: 0; /* Remove default margins */
       text-align: center;
       border-bottom: 2px solid #00664d;
       padding-bottom: 8px;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
     }
     
     .group-title {
       color: #00664d;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 500;
       margin-bottom: 15px;
       border-bottom: 1px solid #00664d;
       padding-bottom: 5px;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
     }
     
     .group-content-empty {
@@ -273,15 +298,15 @@
     
     h2 {
       color: #008866;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 500;
       margin-top: 20px;
       margin-bottom: 10px;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
     }
     
     p {
-      margin-bottom: 15px;
+      margin-bottom: 10px; /* Reduced from 15px */
       text-align: justify;
     }
     
@@ -292,11 +317,11 @@
     }
     
     .sources-title {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
       color: #666;
       margin-bottom: 10px;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
     }
     
     .source-list {
@@ -306,7 +331,7 @@
     
     .source-item {
       margin-bottom: 5px;
-      font-size: 11px;
+      font-size: 9px;
       color: #666;
     }
     
@@ -314,7 +339,7 @@
       display: block;
       margin-top: 2px;
       margin-left: 10px;
-      font-size: 10px;
+      font-size: 8px;
       max-width: 90%;
       overflow-wrap: break-word;
       word-wrap: break-word;
@@ -343,7 +368,7 @@
     }
     
     .source-group-title {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 500;
       color: #008866;
       margin-bottom: 5px;
@@ -371,7 +396,7 @@
       font-weight: 500;
       margin-top: 20px;
       margin-bottom: 10px;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
     }
     
     .content-block p {
@@ -391,25 +416,25 @@
     /* Markdown formatting */
     .markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
       color: #008866;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
       margin-top: 1em;
       margin-bottom: 0.5em;
     }
     
     .markdown h1 {
-      font-size: 22px;
-    }
-    
-    .markdown h2 {
-      font-size: 18px;
-    }
-    
-    .markdown h3 {
       font-size: 16px;
     }
     
+    .markdown h2 {
+      font-size: 14px;
+    }
+    
+    .markdown h3 {
+      font-size: 12px;
+    }
+    
     .markdown p {
-      margin-bottom: 1em;
+      margin-bottom: 0.8em; /* Reduced from 1em */
     }
     
     .markdown ul, .markdown ol {
@@ -437,7 +462,74 @@
     
     /* Better styling for document header/footer */
     @page {
+      size: A4;
       margin: 25mm 20mm;
+    }
+    
+    /* Only remove margins for the cover page */
+    @page :first {
+      size: A4;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Custom footer styling */
+    .page-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: calc(100% - 40px); /* Added margin on both sides */
+      margin: 0 20px; /* Added horizontal margin */
+      padding: 5mm 0;
+      font-size: 9px;
+      color: #333;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    .footer-left {
+      text-align: left;
+      padding-left: 15px; /* Increased from 10px */
+    }
+    
+    .footer-right {
+      text-align: right;
+      padding-right: 15px; /* Increased from 10px */
+    }
+    
+    /* Show footer on all pages except cover page */
+    @page {
+      @bottom-left {
+        content: element(footer);
+      }
+    }
+    
+    @page :first {
+      margin: 0;
+      padding: 0;
+      @bottom-left {
+        content: none;
+      }
+    }
+    
+    /* Print-specific footer styling */
+    @media print {
+      .page-footer {
+        position: running(footer);
+        display: block !important;
+      }
+      
+      /* Hide footer on first page */
+      .cover-page ~ .page-footer {
+        display: none !important;
+      }
+    }
+    
+    /* Hide default header */
+    .page-header {
+      display: none;
     }
     
     /* PDF-specific link styling */
@@ -464,22 +556,23 @@
     }
     
     .source-category-title {
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
       color: #00664d;
       margin: 25px 0 15px 0;
       border-bottom: 1px solid #00664d;
       padding-bottom: 5px;
-      font-family: 'Merriweather', serif;
+      font-family: 'Poppins', sans-serif;
     }
     
     .source-group-title {
-      font-size: 16px;
+      font-size: 12px;
       font-weight: 500;
       color: #008866;
       margin: 15px 0 10px 0;
       border-bottom: 1px solid #dddddd;
       padding-bottom: 3px;
+      font-family: 'Poppins', sans-serif;
     }
     
     /* Partner logo as white */
@@ -494,83 +587,153 @@
     .main-category-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start; /* Changed from center to start at top */
       align-items: center;
-      min-height: 20vh; /* Reduced significantly to avoid blank pages */
-      padding: 2% 0; /* Reduced padding */
-      margin-top: 40px; /* Add top margin instead of page break */
-      margin-bottom: 20px; /* Add bottom margin */
+      min-height: auto; /* Changed from 20vh to auto */
+      padding: 0 0 20px 0; /* Added bottom padding instead of vertical padding */
+      margin-top: 0; /* Remove top margin */
+      margin-bottom: 20px;
     }
     
     /* About page styles */
     .about-page {
       display: flex;
       flex-direction: column;
-      padding: 40px;
+      padding: 0 40px 40px 40px; /* Removed top padding, kept others */
       page-break-after: always;
+      margin-top: 0; /* Ensure no top margin */
     }
     
     .about-title {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 700;
       color: #00664d;
+      margin-top: 0; /* Remove top margin */
       margin-bottom: 20px;
       border-bottom: 2px solid #00664d;
       padding-bottom: 8px;
-      font-family: 'Merriweather', serif;
+      padding-top: 10px; /* Add a small top padding instead of margin */
+      font-family: 'Poppins', sans-serif;
     }
     
     .about-section {
-      margin-bottom: 30px;
+      margin-bottom: 20px; /* Reduced from 30px */
     }
     
     .about-subtitle {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 600;
       color: #008866;
-      margin-bottom: 10px;
-      font-family: 'Merriweather', serif;
+      margin-bottom: 8px; /* Reduced from 10px */
+      font-family: 'Poppins', sans-serif;
     }
     
     .about-content {
-      font-size: 12px;
+      font-size: 9.5pt;
       color: #333;
       line-height: 1.6;
+      margin-bottom: 8px;
     }
     
     /* Specific style for second main category to add page break */
     .second-main-category {
       page-break-before: always;
+      margin-top: 0; /* Ensure no top margin */
+    }
+    
+    /* Add text justification to content areas */
+    p, .section-content, .content-block, .markdown p {
+      text-align: justify;
+    }
+    
+    /* Apply justification to main content sections */
+    .group-section {
+      text-align: justify;
+    }
+    
+    /* Acronyms section styling */
+    .acronyms-section {
+      page-break-before: always;
+      margin-bottom: 40px;
+    }
+    
+    .acronyms-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #00664d;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #00664d;
+      padding-bottom: 8px;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .acronyms-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+    }
+    
+    .acronyms-table td {
+      padding: 4px 8px;
+      vertical-align: top;
+      line-height: 1.3;
+    }
+    
+    .acronyms-table tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+    
+    .acronym {
+      font-weight: 600;
+      padding-right: 15px;
+      white-space: nowrap;
     }
   </style>
 </head>
 <body>
   <!-- Cover Page -->
   <div class="cover-page">
-    <div class="cover-header">
-      {{#if gannetLogoBase64}}
-      <img src="{{gannetLogoBase64}}" alt="GANNET Logo" class="logo">
-      {{else}}
-      <div class="logo-placeholder">GANNET</div>
-      {{/if}}
+    <div class="header">
+      <div class="title-container">
+        <h1 class="title">{{country}}<br>CRISIS</h1>
+      </div>
+    </div>
+    
+    <div class="subtitle-section">
+      <h2 class="subtitle">Situational Analysis</h2>
       
-      {{#if partnerLogoBase64}}
-      <img src="{{partnerLogoBase64}}" alt="Partner Logo" class="partner-logo">
-      {{else}}
-      <div class="logo-placeholder">Partner</div>
-      {{/if}}
-    </div>
-    
-    <div class="cover-content">
-      <p class="cover-country">[Country/Crisis]</p>
-      <h1 class="cover-title">{{title}}</h1>
-      <p class="cover-subtitle">Weekly Situation Report</p>
-      <p class="cover-date-range">[From: DD/MM/YYYY to DD/MM/YYYY]</p>
-      <p class="cover-date">Generated on {{formatDate}}</p>
-    </div>
-    
-    <div class="cover-footer">
-      <p>GANNET SitHub &copy; {{currentYear}}</p>
+      <div>
+        <p class="date">{{formatDate}}</p>
+        
+        <div class="footer">
+          <!-- GANNET logo -->
+          {{#if gannetLogoBase64}}
+          <img src="{{gannetLogoBase64}}" alt="GANNET Logo" class="logo" loading="eager" decoding="sync" />
+          {{else}}
+          <div class="logo">
+            <svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+              <text x="10" y="40" font-family="Arial" font-size="24" font-weight="bold" fill="black" text-rendering="geometricPrecision">GANNET</text>
+              <path d="M10,20 C20,5 40,15 30,25 C20,35 40,45 50,30" stroke="black" fill="none" stroke-width="2" shape-rendering="geometricPrecision"/>
+            </svg>
+          </div>
+          {{/if}}
+          
+          <!-- DFS logo -->
+          {{#if partnerLogoBase64}}
+          <img src="{{partnerLogoBase64}}" alt="DATA FRIENDLY SPACE Logo" class="logo" loading="eager" decoding="sync" />
+          {{else}}
+          <div class="logo">
+            <svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+              <text x="70" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="black" text-rendering="geometricPrecision">DATA</text>
+              <text x="70" y="40" font-family="Arial" font-size="12" font-weight="bold" fill="black" text-rendering="geometricPrecision">FRIENDLY</text>
+              <text x="70" y="55" font-family="Arial" font-size="12" font-weight="bold" fill="black" text-rendering="geometricPrecision">SPACE</text>
+              <circle cx="30" cy="30" r="15" stroke="black" fill="none" stroke-width="2" shape-rendering="geometricPrecision"/>
+              <path d="M30,15 L30,45 M15,30 L45,30" stroke="black" stroke-width="2" shape-rendering="geometricPrecision"/>
+            </svg>
+          </div>
+          {{/if}}
+        </div>
+      </div>
     </div>
   </div>
   
@@ -590,7 +753,27 @@
     <div class="about-section">
       <h2 class="about-subtitle">Methodology</h2>
       <p class="about-content">
-        This report aims to provide reliable and up-to-date information on the context of the situation at hand. To ensure accuracy and relevance, DFS has conducted a rigorous Secondary Data Review (SDR) process, focusing on publicly available data related to the humanitarian context. DFS Analysts leveraged the AI-based tool GANNET to support and accelerate the analysis process; however, all findings presented have been directly developed and verified by the analysis team. Recognizing the potential for bias or inaccuracies in media and other secondary sources, special care has been taken to triangulate and validate all information, with direct links to original sources provided for transparency and further review. In response to requests from partners, DFS rapidly launched the Emergency SituationHub, offering a comprehensive and continually updated background overview. Our interactive media tool supports users in navigating relevant local and international sources, while GANNET has enabled contributions to joint analytical products and inter-agency processes, including workshops, SOPs, workplans, and terms of reference.
+        The Situation Hub's analytical process uses a structured Human-in-the-Loop workflow that combines automated analysis retrieval through GANNET—DFS's AI-powered humanitarian assistant—with expert review by the DFS analysis team. GANNET automates the extraction and generation of crisis-related insights based on structured prompts, which are aligned with a tailored analytical framework. These outputs are then reviewed, validated, and refined by analysts to ensure accuracy, contextual relevance, and operational utility. The workflow is organized into four key phases: planning and setup, ongoing operations, quality assurance, and system evolution, ensuring a balance between speed and analytical rigor.
+      </p>
+
+      <h3 class="about-subtitle" style="font-size: 16px; margin-top: 15px;">Planning, Setup & Quality Control</h3>
+      <p class="about-content">
+        In the planning phase, analysts develop a contextualized analytical framework—largely based on the Joint Intersectoral Analysis Framework (JIAF)—and convert it into structured prompts for AI-assisted data extraction. These prompts are refined over time to improve output quality. Data sources are vetted for reliability, and translations are reviewed for accuracy. Using a centralized Content Management System (CMS), analysts review and curate AI-generated outputs, validate them against external sources, and make refinements to enhance clarity and relevance. The CMS enables collaborative editing, version tracking, and ensures outputs align with humanitarian needs.
+      </p>
+
+      <h3 class="about-subtitle" style="font-size: 16px; margin-top: 15px;">Bias Mitigation</h3>
+      <p class="about-content">
+        To minimize bias, the team diversifies data sources, cross-verifies information, and continuously evaluates the AI's performance. Analysts play a crucial role in identifying and correcting inaccuracies, especially in automated categorization. Future improvements aim to enhance source credibility checks and sentiment analysis, further strengthening the reliability of the Situation Hub's outputs.
+      </p>
+
+      <h3 class="about-subtitle" style="font-size: 16px; margin-top: 15px;">Landing Page Overview</h3>
+      <p class="about-content">
+        The SituationHub landing pages use a standardized yet customizable template to deliver consistent, comprehensive crisis overviews. These pages integrate static content with dynamic data from sources like ACLED and DTM via open APIs, enabling interactive visuals with real-time updates. Regular reviews and verification with in-country partners ensure accuracy, while manual updates are used for sources not connected to APIs.
+      </p>
+
+      <h3 class="about-subtitle" style="font-size: 16px; margin-top: 15px;">Media Monitoring</h3>
+      <p class="about-content">
+        The media monitoring process has evolved from a manual, list-based approach to an AI-assisted system integrated into the CMS. This allows analysts to efficiently review, filter, and contextualize media narratives, while automation helps track emerging trends.
       </p>
     </div>
     
@@ -607,7 +790,8 @@
   </div>
 
   <div class="container">
-    <h1 class="report-title">{{title}}</h1>
+    <!-- Removing the report title -->
+    <!-- <h1 class="report-title">{{title}}</h1> -->
     
     <!-- Table of Contents -->
     <div class="toc-container">
@@ -654,12 +838,6 @@
         </div>
         {{/each}}
       </div>
-      
-      {{#if hasConsolidatedSources}}
-      <div class="toc-group">
-        <div class="toc-group-title">Sources</div>
-      </div>
-      {{/if}}
     </div>
     
     <!-- Content -->
@@ -743,8 +921,114 @@
       {{/each}}
     </div>
     
+    <!-- Acronyms Section -->
+    <div class="acronyms-section">
+      <h1 class="acronyms-title">Acronyms</h1>
+      <table class="acronyms-table">
+        <tbody>
+          <tr><td class="acronym">ACLED</td><td>The Armed Conflict Location & Event Data Project</td></tr>
+          <tr><td class="acronym">ANERA</td><td>American Near East Refugee Aid</td></tr>
+          <tr><td class="acronym">ATGM</td><td>Anti-Tank Guided Missiles</td></tr>
+          <tr><td class="acronym">AOAV</td><td>Action on Armed Violence</td></tr>
+          <tr><td class="acronym">AOR</td><td>Area of Responsibility</td></tr>
+          <tr><td class="acronym">AWD</td><td>Acute watery diarrhoea</td></tr>
+          <tr><td class="acronym">BBC</td><td>British Broadcasting Corporation</td></tr>
+          <tr><td class="acronym">CAFI</td><td>Call to Action Field Implementation</td></tr>
+          <tr><td class="acronym">CCCM</td><td>Camp coordination and camp management</td></tr>
+          <tr><td class="acronym">CFR</td><td>Centre for Preventive Action</td></tr>
+          <tr><td class="acronym">CP</td><td>Child Protection</td></tr>
+          <tr><td class="acronym">CRSV</td><td>Conflict-related sexual violence</td></tr>
+          <tr><td class="acronym">DFS</td><td>Data Friendly Space</td></tr>
+          <tr><td class="acronym">DRC</td><td>Danish Refugee Council</td></tr>
+          <tr><td class="acronym">DTM</td><td>Displacement Tracking Matrix</td></tr>
+          <tr><td class="acronym">ECD</td><td>Early Childhood Development</td></tr>
+          <tr><td class="acronym">ECP</td><td>Escola de Cultura de Pau</td></tr>
+          <tr><td class="acronym">ERW</td><td>Explosive remnants of war</td></tr>
+          <tr><td class="acronym">ESCWA</td><td>The Economic and Social Commission for Western Asia</td></tr>
+          <tr><td class="acronym">FAO</td><td>Food and Agriculture Organization</td></tr>
+          <tr><td class="acronym">FCS</td><td>Food Consumption Score</td></tr>
+          <tr><td class="acronym">FEWSNET</td><td>The Famine Early Warning Systems Network</td></tr>
+          <tr><td class="acronym">FGD</td><td>Focused Group Discussion</td></tr>
+          <tr><td class="acronym">GAM</td><td>Global Acute Malnutrition</td></tr>
+          <tr><td class="acronym">GBV</td><td>Gender-based violence</td></tr>
+          <tr><td class="acronym">GDP</td><td>Gross domestic product</td></tr>
+          <tr><td class="acronym">HNO</td><td>Humanitarian Needs Overview</td></tr>
+          <tr><td class="acronym">HRP</td><td>Humanitarian Response Plan</td></tr>
+          <tr><td class="acronym">HRW</td><td>Human Rights Watch</td></tr>
+          <tr><td class="acronym">ICG</td><td>International Coordination Group on Vaccine Provision</td></tr>
+          <tr><td class="acronym">ICRC</td><td>International Committee of the Red Cross</td></tr>
+          <tr><td class="acronym">IDF</td><td>Israeli Defence Forces</td></tr>
+          <tr><td class="acronym">IDMC</td><td>Internal Displacement Monitoring Centre</td></tr>
+          <tr><td class="acronym">IDP</td><td>Internally displaced person</td></tr>
+          <tr><td class="acronym">IED</td><td>Improvised explosive device</td></tr>
+          <tr><td class="acronym">IMF</td><td>International Monetary Fund</td></tr>
+          <tr><td class="acronym">INGO</td><td>International non-governmental organisation</td></tr>
+          <tr><td class="acronym">IOM</td><td>International Organization for Migration</td></tr>
+          <tr><td class="acronym">IPC</td><td>Integrated Food Security Phase Classification</td></tr>
+          <tr><td class="acronym">IRC</td><td>International Rescue Committee</td></tr>
+          <tr><td class="acronym">ISW</td><td>Institute for the Study of War</td></tr>
+          <tr><td class="acronym">IYCF</td><td>Infant and Young Child Feeding Practices</td></tr>
+          <tr><td class="acronym">KII</td><td>Key Informant Interview</td></tr>
+          <tr><td class="acronym">LBP</td><td>The Lebanese Pound</td></tr>
+          <tr><td class="acronym">LRP</td><td>Lebanon Response Plan</td></tr>
+          <tr><td class="acronym">LMAC</td><td>Lebanon Mine Action Centre</td></tr>
+          <tr><td class="acronym">MAG</td><td>Mines Advisory Group</td></tr>
+          <tr><td class="acronym">MEHE</td><td>Minister of Education and Higher Education</td></tr>
+          <tr><td class="acronym">MHPSS</td><td>Mental health and psychosocial support services</td></tr>
+          <tr><td class="acronym">MoEHE</td><td>Ministry of Education and Higher Education</td></tr>
+          <tr><td class="acronym">MoSA</td><td>Ministry of Social Affairs</td></tr>
+          <tr><td class="acronym">MSF</td><td>Medecins Sans Frontieres</td></tr>
+          <tr><td class="acronym">MSNA</td><td>Multi-Sectoral Needs Assessment</td></tr>
+          <tr><td class="acronym">NCDs</td><td>Non-Communicable Diseases</td></tr>
+          <tr><td class="acronym">NDVI</td><td>Normalised difference vegetation index (vegetative health)</td></tr>
+          <tr><td class="acronym">NFI</td><td>Non-food item</td></tr>
+          <tr><td class="acronym">NGO</td><td>Non-Governmental Organisation</td></tr>
+          <tr><td class="acronym">NRC</td><td>Norwegian Refugee Council</td></tr>
+          <tr><td class="acronym">OHCHR</td><td>Office of the United Nations High Commissioner for Human Rights</td></tr>
+          <tr><td class="acronym">OTP</td><td>Outpatient therapeutic feeding programs</td></tr>
+          <tr><td class="acronym">PHCCs</td><td>Primary Health Care Centres</td></tr>
+          <tr><td class="acronym">PIN</td><td>People in need</td></tr>
+          <tr><td class="acronym">PLO</td><td>Palestine Liberation Organization</td></tr>
+          <tr><td class="acronym">PLW</td><td>Pregnant and Lactating Women</td></tr>
+          <tr><td class="acronym">PM</td><td>Protection Monitoring</td></tr>
+          <tr><td class="acronym">PRL</td><td>Palestinian Refugees from Lebanon</td></tr>
+          <tr><td class="acronym">PSEA</td><td>Protection from Sexual Exploitation and Abuse</td></tr>
+          <tr><td class="acronym">PTSD</td><td>Post-traumatic stress disorder</td></tr>
+          <tr><td class="acronym">PwD</td><td>People with Disability</td></tr>
+          <tr><td class="acronym">RNA</td><td>Rapid Needs Assessment</td></tr>
+          <tr><td class="acronym">SAM</td><td>Severe acute malnutrition</td></tr>
+          <tr><td class="acronym">SDR</td><td>Secondary Data Review</td></tr>
+          <tr><td class="acronym">SEA</td><td>Sexual exploitation and abuse</td></tr>
+          <tr><td class="acronym">SGBV</td><td>Sexual and gender-based violence</td></tr>
+          <tr><td class="acronym">SMEB</td><td>Standard Minimum Expenditure Basket</td></tr>
+          <tr><td class="acronym">SOGIESC</td><td>Sexual Orientations, Gender Identities, and Expressions</td></tr>
+          <tr><td class="acronym">SRH</td><td>Sexual and reproductive health</td></tr>
+          <tr><td class="acronym">SSA</td><td>Surveillance System for Attacks on Health Care</td></tr>
+          <tr><td class="acronym">STIs</td><td>Sexually Transmitted Infections</td></tr>
+          <tr><td class="acronym">TSFP</td><td>Targeted Supplementary Feeding Program</td></tr>
+          <tr><td class="acronym">UASC</td><td>Unaccompanied and Separated Children</td></tr>
+          <tr><td class="acronym">UAV</td><td>Unarmed Aerial Vehicles</td></tr>
+          <tr><td class="acronym">UNDP</td><td>United Nations Development Programme</td></tr>
+          <tr><td class="acronym">UNFPA</td><td>The United Nations Population Fund</td></tr>
+          <tr><td class="acronym">UNHCR</td><td>United Nations High Commissioner for Refugees</td></tr>
+          <tr><td class="acronym">UNICEF</td><td>United Nations Children's Fund</td></tr>
+          <tr><td class="acronym">UNRWA</td><td>The United Nations Relief and Works Agency for Palestine Refugees in the Near East</td></tr>
+          <tr><td class="acronym">UNSC</td><td>United Nations Security Council</td></tr>
+          <tr><td class="acronym">UNW</td><td>UN Women</td></tr>
+          <tr><td class="acronym">USAID</td><td>United States Agency for Development</td></tr>
+          <tr><td class="acronym">UXO</td><td>Unexploded ordnance</td></tr>
+          <tr><td class="acronym">VASyR</td><td>Vulnerability Assessment of Syrian Refugees in Lebanon</td></tr>
+          <tr><td class="acronym">VPDs</td><td>Vaccine Preventable Diseases</td></tr>
+          <tr><td class="acronym">OCHA</td><td>United Nations Office for the Coordination of Humanitarian Affairs</td></tr>
+          <tr><td class="acronym">WASH</td><td>Water, sanitation and hygiene</td></tr>
+          <tr><td class="acronym">WFP</td><td>World Food Programme</td></tr>
+          <tr><td class="acronym">WHO</td><td>World Health Organization</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
     <!-- Consolidated Sources Section -->
-    {{#if hasConsolidatedSources}}
+    {{#if false}}
     <div class="consolidated-sources">
       <h2 class="sources-title">Sources</h2>
       
@@ -816,5 +1100,37 @@
     </div>
     {{/if}}
   </div>
+  
+  <!-- Custom footer that will appear on all pages except the cover page -->
+  <div id="footer" class="page-footer">
+    <div class="footer-left">{{country}} Crisis  |  Situational Analysis  |  {{formatDate}}</div>
+    <div class="footer-right"><span class="pageNumber"></span></div>
+  </div>
+
+  <!-- Script to handle footer positioning -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mark the first page (cover) to not display the footer
+      const coverPage = document.querySelector('.cover-page');
+      if (coverPage) {
+        coverPage.setAttribute('data-no-footer', 'true');
+      }
+    });
+  </script>
+
+  <!-- Add a script to handle page numbers for table of contents -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Only keep essential functionality for links and navigation
+      // Setup for internal links
+      const internalLinks = document.querySelectorAll('a.internal-link');
+      internalLinks.forEach(link => {
+        const targetId = link.getAttribute('data-target-id');
+        if (targetId) {
+          // Enhance internal navigation if needed
+        }
+      });
+    });
+  </script>
 </body>
 </html>
