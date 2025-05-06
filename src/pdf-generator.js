@@ -449,7 +449,7 @@ async function generateAdvancedPDF(country = 'COUNTRY', reportDate = '') {
               document.currentScript.parentElement.style.visibility = 'hidden';
             }
           </script>
-          <div style="display: flex; justify-content: space-between; width: calc(100% - 24mm); margin: 0 12mm;">
+          <div style="display: flex; justify-content: space-between; width: calc(100% - 40mm); margin: 0 20mm; color: #555555;">
             <div style="text-align: justify;">${country} Crisis | Situational Analysis | ${formattedDate}</div>
             <div style="text-align: justify;"><span class="pageNumber"></span></div>
           </div>

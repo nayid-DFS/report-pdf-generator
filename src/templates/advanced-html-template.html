@@ -272,8 +272,7 @@
       font-size: 18px;
       font-weight: 700;
       margin: 0; /* Remove default margins */
-      text-align: center;
-      border-bottom: 2px solid #00664d;
+      text-align: left;
       padding-bottom: 8px;
       font-family: 'Poppins', sans-serif;
     }
@@ -382,11 +381,10 @@
     
     /* Content styling */
     .content-block {
-      background-color: #f9f9f9;
+      background-color: transparent;
       padding: 15px;
       border-radius: 5px;
       margin-bottom: 20px;
-      border-left: 3px solid #008866;
     }
     
     /* Styling for content */
@@ -463,7 +461,7 @@
     /* Better styling for document header/footer */
     @page {
       size: A4;
-      margin: 25mm 20mm;
+      margin: 16.25mm 10mm;
     }
     
     /* Only remove margins for the cover page */
@@ -479,11 +477,12 @@
       bottom: 0;
       left: 0;
       right: 0;
-      width: calc(100% - 40px); /* Added margin on both sides */
-      margin: 0 20px; /* Added horizontal margin */
+      width: calc(100% - 20mm); /* Changed to match 10mm on each side */
+      margin: 0 10mm; /* Changed to 10mm horizontal margin */
       padding: 5mm 0;
       font-size: 9px;
-      color: #333;
+      font-family: 'Inter', sans-serif;
+      color: #555555;
       display: flex;
       justify-content: space-between;
       border-top: 1px solid #e0e0e0;
@@ -492,11 +491,13 @@
     .footer-left {
       text-align: left;
       padding-left: 15px; /* Increased from 10px */
+      color: #555555;
     }
     
     .footer-right {
       text-align: right;
       padding-right: 15px; /* Increased from 10px */
+      color: #555555;
     }
     
     /* Show footer on all pages except cover page */
@@ -519,6 +520,9 @@
       .page-footer {
         position: running(footer);
         display: block !important;
+        color: #555555 !important;
+        margin: 0 10mm !important;
+        width: calc(100% - 20mm) !important;
       }
       
       /* Hide footer on first page */
@@ -588,7 +592,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start; /* Changed from center to start at top */
-      align-items: center;
+      align-items: flex-start;
       min-height: auto; /* Changed from 20vh to auto */
       padding: 0 0 20px 0; /* Added bottom padding instead of vertical padding */
       margin-top: 0; /* Remove top margin */
@@ -1114,6 +1118,14 @@
       const coverPage = document.querySelector('.cover-page');
       if (coverPage) {
         coverPage.setAttribute('data-no-footer', 'true');
+      }
+      
+      // Ensure footer styles are applied
+      const footer = document.getElementById('footer');
+      if (footer) {
+        footer.style.color = '#555555';
+        footer.style.margin = '0 10mm';
+        footer.style.width = 'calc(100% - 20mm)';
       }
     });
   </script>
